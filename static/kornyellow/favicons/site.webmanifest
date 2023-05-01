@@ -1,0 +1,22 @@
+{
+	"dir": "ltr",
+	"lang": "th",
+	"name": "kornyellow",
+	"short_name": "korn",
+	"categories": ["education", "lifestyle", "entertainment", "news", "games"],
+	"description": "ผม กร โรจน์รัตนปัญญา ยินดีต้อนรับเข้าสู่เว็บไซต์ของผม บริการทำเว็บ ทำเกม ตัดต่อเพลง",
+
+	"start_url": "/",
+	"scope": "/",
+	"icons": [
+		{ "src":"/static/kornyellow/favicons/16.png", "sizes":"16x16", "type":"image/png" },
+		{ "src":"/static/kornyellow/favicons/32.png", "sizes":"32x32", "type":"image/png" },
+		{ "src":"/static/kornyellow/favicons/192.png", "sizes":"192x192", "type":"image/png" },
+		{ "src":"/static/kornyellow/favicons/512.png", "sizes":"512x512", "type":"image/png" }
+	],
+
+	"orientation": "portrait-primary",
+	"theme_color":"#FEB213",
+	"background_color":"#1D1D1D",
+	"display":"standalone"
+}

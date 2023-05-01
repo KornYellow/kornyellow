@@ -1,0 +1,5 @@
+/vendor
+/.idea
+/.CREDENTIAL
+/static/bootstrap
+/static/fontawesome

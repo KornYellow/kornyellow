@@ -1,0 +1,18 @@
+AddType text/css .css
+AddType application/javascript .js
+AddCharset utf-8 .css .js
+
+<filesMatch ".(jpg|jpeg|png|gif|ico|svg|ttf|eot|woff|woff2|css|js)$">
+Header set Cache-Control "max-age=180, public"
+</filesMatch>
+
+Header unset Pragma
+Header unset X-Powered-By
+
+ReWriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.+) - [PT,L]
+
+ReWriteRule ^(.*) index.php
