@@ -47,6 +47,27 @@ class KYUser extends KYMethod {
 
 		return self::$getCache = self::processObject(new KornQuery($select), true);
 	}
+	protected static function processObject(KornQuery $query, bool $isArray = false): User|array|null {
+		$result = [];
+		$firstIndex = null;
+
+		$bind = KornStatement::getEmptyFieldsName(self::$table);
+		while ($bind = $query->nextBind($bind)) {
+			if (is_null($firstIndex))
+				$firstIndex = $bind['u_id'];
+			$result[$bind['u_id']] = new User(
+				$bind['u_id'],
+				$bind['u_email'],
+				$bind['u_password'],
+				$bind['u_amount_cached'],
+			);
+			if (!$isArray)
+				return $result[$firstIndex];
+		}
+		if (count($result) == 0)
+			return null;
+		return $result;
+	}
 	public static function loggedIn(): User|null {
 		$user = self::isLogin();
 		if (is_null($user))
@@ -74,27 +95,6 @@ class KYUser extends KYMethod {
 		$select->where('u_id', $id);
 
 		return self::$getCache[$id] = self::processObject(new KornQuery($select));
-	}
-	protected static function processObject(KornQuery $query, bool $isArray = false): User|array|null {
-		$result = [];
-		$firstIndex = null;
-
-		$bind = KornStatement::getEmptyFieldsName(self::$table);
-		while ($bind = $query->nextBind($bind)) {
-			if (is_null($firstIndex))
-				$firstIndex = $bind['u_id'];
-			$result[$bind['u_id']] = new User(
-				$bind['u_id'],
-				$bind['u_email'],
-				$bind['u_password'],
-				$bind['u_amount_cached'],
-			);
-			if (!$isArray)
-				return $result[$firstIndex];
-		}
-		if (count($result) == 0)
-			return null;
-		return $result;
 	}
 	public static function login(string $email, string $password): bool {
 		$user = self::getByEmail($email);
