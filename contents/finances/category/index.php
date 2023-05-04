@@ -30,12 +30,10 @@ else {
 ?>
 
 <section>
-	<?= KYHeading::level1('จัดการชนิดการเงิน', 'fa-list', '
-		<div class="row g-1">
-			<div class="col-12 col-md-auto">'.KYLink::internal('/finances/category/create', 'เพิ่มชนิดการเงิน', 'fa-plus').'</div>
-			<div class="col-12 col-md-auto">'.KYLink::internal('/finances', 'ย้อนกลับ', 'fa-rotate-left').'</div>
-		</div>
-  ') ?>
+	<?= KYHeading::level1('จัดการชนิดการเงิน', 'fa-list',
+		KYLink::internal('/finances/category/create', 'เพิ่มชนิดการเงิน', 'fa-plus'),
+		KYLink::internal('/finances', 'ย้อนกลับ', 'fa-rotate-left'),
+	) ?>
 	<table class="table table-striped">
 		<thead>
 		<tr>

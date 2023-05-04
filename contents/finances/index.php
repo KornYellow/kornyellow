@@ -33,19 +33,17 @@ if ($transactionsDisplay == '')
 ?>
 
 <section>
-	<?= KYHeading::level1('จัดการการเงิน', 'fa-list', '
-		<div class="row g-1">
-			<div class="col-12 col-md-auto">'.KYLink::internal('/finances/create', 'อัปเดตข้อมูลการเงิน', 'fa-pen-to-square').'</div>
-			<div class="col-12 col-md-auto">'.KYLink::internal('/finances/category', 'จัดการชนิดการเงิน', 'fa-tag').'</div>
-		</div>
-	') ?>
+	<?= KYHeading::level1('จัดการการเงิน', 'fa-list',
+		KYLink::internal('/finances/create', 'อัปเดตข้อมูลการเงิน', 'fa-pen-to-square'),
+		KYLink::internal('/finances/category', 'จัดการชนิดการเงิน', 'fa-tag'),
+	) ?>
 	<div class="row g-2 mb-5">
 		<div class="col-12 col-lg-4">
 			<div class="bg-slate-700 rounded-3 px-2 px-sm-3 py-2 text-nowrap">
 				<div class="text-slate-400 fs-5"><i class="fa-solid fa-wallet fa-fw me-2 text-yellow"></i>เงินคงเหลือ
 				</div>
 				<div class="fs-3">
-					<span class="fw-light">฿</span>
+					<span>฿</span>
 					<span class="fw-semibold"><?= number_format($currentBalance, 2) ?></span>
 				</div>
 			</div>
@@ -56,7 +54,7 @@ if ($transactionsDisplay == '')
 				</div>
 				<div class="d-flex justify-content-between">
 					<div class="fs-3">
-						<span class="fw-light">฿</span>
+						<span>฿</span>
 						<span class="fw-semibold"><?= number_format($incomeInMonth, 2) ?></span>
 					</div>
 					<div class="text-slate-400 text-truncate">
@@ -71,7 +69,7 @@ if ($transactionsDisplay == '')
 				</div>
 				<div class="d-flex justify-content-between">
 					<div class="fs-3">
-						<span class="fw-light">฿</span>
+						<span>฿</span>
 						<span class="fw-semibold"><?= number_format($outcomeInMonth, 2) ?></span>
 					</div>
 					<div class="text-slate-400 text-truncate">
@@ -81,11 +79,10 @@ if ($transactionsDisplay == '')
 			</div>
 		</div>
 	</div>
-	<?= KYHeading::level1('ประวัติการเงินวันนี้', 'fa-clock-rotate-left', '
-		<div class="row g-1">
-			<div class="col-12 col-md-auto">'.KYLink::internal('/finances/history', 'ดูเพิ่มเติม', 'fa-bars').'</div>
-		</div>
-	') ?>
+	<?= KYHeading::level1('ประวัติการเงินวันนี้', 'fa-clock-rotate-left',
+		KYLink::internal('/finances/statistic', 'ดูสถิติ', 'fa-chart-column'),
+		KYLink::internal('/finances/history', 'ดูเพิ่มเติม', 'fa-bars'),
+	) ?>
 	<div class="row g-2">
 		<?= $transactionsDisplay ?>
 	</div>

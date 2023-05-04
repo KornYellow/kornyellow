@@ -88,7 +88,7 @@ class KYTransactionHistory {
 	public static function historyEmpty(): string {
 		return '
 			<div class="col-12">
-				<div class="bg-slate-700 rounded-3 px-2 px-sm-3 py-2 text-slate-300 text-nowrap">
+				<div class="bg-slate-700 rounded-3 px-2 px-sm-3 py-2 text-slate-300 text-nowrap fw-semibold text-center">
 					<i class="fa-solid fa-exclamation fa-fw me-2"></i>ยังไม่พบข้อมูลที่ท่านต้องการ
 				</div>
 			</div>

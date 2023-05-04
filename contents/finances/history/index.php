@@ -83,18 +83,16 @@ if ($transactionsDisplay == '')
 ?>
 
 <section>
-	<?= KYHeading::level1('ประวัติการเงิน', 'fa-clock-rotate-left', '
-		<div class="row g-1">
-			<div class="col-12 col-md-auto">'.KYLink::internal('/finances', 'ย้อนกลับ', 'fa-rotate-left').'</div>
-		</div>
-	') ?>
+	<?= KYHeading::level1('ประวัติการเงิน', 'fa-clock-rotate-left',
+		KYLink::internal('/finances', 'ย้อนกลับ', 'fa-rotate-left'),
+	) ?>
 	<div class="row g-2 mb-3">
 		<div class="col-12">
 			<div class="bg-slate-700 rounded-3 px-2 px-sm-3 py-2 text-nowrap">
 				<div class="text-slate-400 fs-5"><i class="fa-solid fa-wallet fa-fw me-2 text-yellow"></i>เงินคงเหลือ
 				</div>
 				<div class="fs-3">
-					<span class="fw-light">฿</span>
+					<span>฿</span>
 					<span
 						class="fw-semibold"><?= number_format(KYTransaction::reCalculateBalance(KYUser::loggedIn()), 2) ?></span>
 				</div>
@@ -103,35 +101,27 @@ if ($transactionsDisplay == '')
 	</div>
 	<div class="mb-5">
 		<form method="get" autocomplete="off">
-			<div class="row row-cols-auto g-2">
-				<div class="col">
-					<button name="timespan" value="sevendays" type="submit"
-					        class="btn btn-outline-yellow text-nowrap fw-bold <?= is_null($requestText) || $requestText == 'sevendays' ? 'active' : '' ?>">
-						ภายในเจ็ดวันที่ผ่านมา
-					</button>
-				</div>
-				<div class="col">
-					<button name="timespan" value="fourteendays" type="submit"
-					        class="btn btn-outline-yellow text-nowrap fw-bold <?= $requestText == 'fourteendays' ? 'active' : '' ?>">
-						ภายในสิบสี่วันที่ผ่านมา
-					</button>
-				</div>
-				<div class="col">
-					<button name="timespan" value="thismonth" type="submit"
-					        class="btn btn-outline-yellow text-nowrap fw-bold <?= $requestText == 'thismonth' ? 'active' : '' ?>">
-						ภายในเดือนนี้
-					</button>
-				</div>
-				<div class="col">
-					<button name="timespan" value="lastmonth" type="submit"
-					        class="btn btn-outline-yellow text-nowrap fw-bold <?= $requestText == 'lastmonth' ? 'active' : '' ?>">
-						ภายในเดือนที่แล้ว
-					</button>
-				</div>
+			<div class="d-flex gap-2 overflow-x-scroll">
+				<button name="timespan" value="sevendays" type="submit"
+				        class="btn btn-outline-yellow py-1 text-nowrap fw-bold <?= is_null($requestText) || $requestText == 'sevendays' ? 'active' : '' ?>">
+					ภายในเจ็ดวันที่ผ่านมา
+				</button>
+				<button name="timespan" value="fourteendays" type="submit"
+				        class="btn btn-outline-yellow py-1 text-nowrap fw-bold <?= $requestText == 'fourteendays' ? 'active' : '' ?>">
+					ภายในสิบสี่วันที่ผ่านมา
+				</button>
+				<button name="timespan" value="thismonth" type="submit"
+				        class="btn btn-outline-yellow py-1 text-nowrap fw-bold <?= $requestText == 'thismonth' ? 'active' : '' ?>">
+					ภายในเดือนนี้
+				</button>
+				<button name="timespan" value="lastmonth" type="submit"
+				        class="btn btn-outline-yellow py-1 text-nowrap fw-bold <?= $requestText == 'lastmonth' ? 'active' : '' ?>">
+					ภายในเดือนที่แล้ว
+				</button>
 			</div>
 		</form>
 	</div>
-	<?= KYHeading::level2($transactionHeader, 'fa-calendar-days') ?>
+	<?= KYHeading::level2($transactionHeader) ?>
 	<div class="row g-2">
 		<?= $transactionsDisplay ?>
 	</div>

@@ -14,7 +14,9 @@ $blog_status = KornRequest::get('blog_status')->toString();
 ?>
 
 <section>
-	<?= KYHeading::level1('จัดการบทความ', null, KYLink::internal('/blogs/create', 'เขียนบทความใหม่')) ?>
+	<?= KYHeading::level1('จัดการบทความ', null,
+		KYLink::internal('/blogs/create', 'เขียนบทความใหม่'),
+	) ?>
 
 	<div class="d-flex gap-2">
 		<div><?= KYLink::internal('/blogs/manage', 'ทั้งหมด', $blog_status == '') ?></div>

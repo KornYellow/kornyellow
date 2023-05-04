@@ -31,7 +31,7 @@ if (KornRequest::post('submit')->isValid()) {
 		<div class="mb-3">
 			<label for="email" class="form-label">ที่อยู่อีเมล</label>
 			<input type="email" required class="form-control" name="email" id="email" placeholder="korn@kornyellow.com"
-			       autocomplete="email"/>
+			       autocomplete="email" autofocus/>
 		</div>
 		<div class="mb-3">
 			<label for="password" class="form-label">รหัสผ่าน</label>

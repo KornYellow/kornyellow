@@ -76,6 +76,12 @@ $slate-50: #FAFAF9;
 		--bs-dropdown-link-color: #{$slate-400};
 		--bs-dropdown-link-hover-bg: #{$slate-700};
 		--bs-dropdown-link-hover-color: #{$slate-200};
+		padding: 0.5em;
+
+		.dropdown-item {
+			border-radius: 0.5em;
+			padding: 0.25em 0.8em;
+		}
 	}
 }
 
@@ -101,6 +107,14 @@ body {
 	font-family: "IBM Plex Sans Thai", sans-serif;
 	letter-spacing: 0.01em;
 	line-height: 2.2em;
+}
+
+* {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	*::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 * {
@@ -181,6 +195,21 @@ body {
 .form-label { color: $slate-400 !important; }
 .form-text { color: $slate-500 !important; }
 
+.input-baht {
+	position: relative;
+
+	&::after {
+		background-color: $slate-800 !important;
+		color: $slate-500 !important;
+		content: "บาท";
+		font-weight: 600;
+		padding-left: 0.5em;
+		position: absolute;
+		right: 0.8em;
+		top: 1px;
+	}
+}
+
 /* LINKS AND BUTTONS */
 .link-yellow {
 	color: $yellow-500 !important;
@@ -189,7 +218,10 @@ body {
 	&:hover { color: $yellow-400 !important; }
 }
 
-a:focus, button:focus { outline: 2px solid $slate-300 !important; }
+a:focus, button:focus, a:focus-visible, button:focus-visible {
+	box-shadow: none !important;
+	outline: none !important;
+}
 
 .btn-yellow {
 	background-color: $yellow-500 !important;

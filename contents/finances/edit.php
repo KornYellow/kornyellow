@@ -22,7 +22,7 @@ if (KornRequest::get('id')->isNull())
 $transaction = KYTransaction::get(KornRequest::get('id')->toInteger());
 
 if (KornRequest::post('submit')->isValid()) {
-	$amount = KornRequest::post('amount')->toFloat();
+	$amount = floatval(str_replace(',', '', KornRequest::post('amount')->toString()));
 	$name = KornRequest::post('name')->toString();
 	$type = EnumTransactionType::create(KornRequest::post('type')->toString());
 	$category = KYTransactionCategory::get(KornRequest::post('category')->toInteger());
@@ -60,47 +60,47 @@ $categories .= '<option value="-1" '.KYForm::isSelected(is_null($transaction->ge
 ?>
 
 <section>
-	<?= KYHeading::level1('แก้ไขข้อมูลการเงิน', 'fa-pen-to-square', '
-		<div class="row g-1">
-			<div class="col-12 col-md-auto">'.KYLink::internal('/finances', 'ย้อนกลับ', 'fa-rotate-left').'</div>
-		</div>
-	') ?>
+	<?= KYHeading::level1('แก้ไขข้อมูลการเงิน', 'fa-pen-to-square',
+		KYLink::internal('/finances', 'ย้อนกลับ', 'fa-rotate-left'),
+	) ?>
 	<form method="post" autocomplete="off">
 		<div class="mb-3">
 			<div class="row g-2">
 				<div class="col">
 					<input required type="radio" class="btn-check" name="type" value="outcome" id="typeOutcome"
-					       autocomplete="off" <?= KYForm::isChecked($transaction->getTransactionType()->compareTo(EnumTransactionType::OUTCOME())) ?>>
-					<label class="btn btn-outline-yellow d-block fs-4 fw-semibold py-2" for="typeOutcome">
-						<i class="fa-solid fa-arrow-up fa-fw me-2"></i>รายจ่าย
+					       autocomplete="off" checked>
+					<label class="btn btn-outline-yellow d-block fs-4 fw-bold py-1" for="typeOutcome">
+						<i class="fa-solid fa-cash-register fa-fw me-2"></i>รายจ่าย
 					</label>
 				</div>
 				<div class="col">
 					<input required type="radio" class="btn-check" name="type" value="income" id="typeIncome"
-					       autocomplete="off" <?= KYForm::isChecked($transaction->getTransactionType()->compareTo(EnumTransactionType::INCOME())) ?>>
-					<label class="btn btn-outline-yellow d-block fs-4 fw-semibold py-2" for="typeIncome">
-						<i class="fa-solid fa-arrow-down fa-fw me-2"></i>รายรับ
+					       autocomplete="off">
+					<label class="btn btn-outline-yellow d-block fs-4 fw-bold py-1" for="typeIncome">
+						<i class="fa-solid fa-wallet fa-fw me-2"></i>รายรับ
 					</label>
 				</div>
 			</div>
 		</div>
-		<div class="mb-3">
-			<label for="amount" class="form-label">เป็นจำนวนเงิน</label>
-			<input type="number" required class="form-control" name="amount" id="amount" placeholder="100.00"
-			       value="<?= $transaction->getAmount() ?>"
-			       step="0.01" autocomplete="off"/>
+		<div class="row g-2 mb-3">
+			<div class="col">
+				<label for="name" class="form-label">ชื่อรายการ</label>
+				<input type="text" required class="form-control" name="name" id="name"
+				       placeholder="รายการการเงิน" autocomplete="off" value="<?= $transaction->getName() ?>"/>
+			</div>
+			<div class="col">
+				<label for="amount" class="form-label">เป็นจำนวนเงิน</label>
+				<div class="input-baht">
+					<input type="text" required class="form-control" name="amount" id="amount" placeholder="0.00"
+					       autocomplete="off" value="<?= number_format($transaction->getAmount(), 2) ?>"/>
+				</div>
+			</div>
 		</div>
 		<div class="mb-3">
 			<label for="category" class="form-label">ชนิดของการเงิน</label>
 			<select required class="form-select" id="category" name="category">
 				<?= $categories ?>
 			</select>
-		</div>
-		<div class="mb-3">
-			<label for="name" class="form-label">ชื่อรายการ</label>
-			<input type="text" required class="form-control" name="name" id="name"
-			       value="<?= $transaction->getName() ?>"
-			       placeholder="ข้าวขาหมู, ขนม, น้ำเปล่า" autocomplete="off"/>
 		</div>
 		<div class="mb-3">
 			<label for="date" class="form-label">วันที่ทำรายการ</label>

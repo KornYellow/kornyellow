@@ -16,16 +16,16 @@ $ageInYears = $birthDay->getDifferenceInYears(new KornDateTime());
 
 <section>
 	<?= KYHeading::level1('ผมเป็นใคร', 'fa-question') ?>
-	<div class="bg-slate-700 rounded-3 px-2 px-sm-4 py-4 mb-5">
+	<div class="bg-slate-700 rounded-3 p-2 p-sm-3 mb-5">
 		<div class="row g-4">
-			<div class="col-12 col-lg-3">
+			<div class="col-12 col-lg-2">
 				<div class="img-square rounded-3">
 					<img class="img-fluid" src="/static/kornyellow/images/korn_portrait.jpg" alt="Korn Portrait">
 				</div>
 			</div>
-			<div class="col-12 col-lg-9">
+			<div class="col-12 col-lg-10">
 				<div class="fs-2 fw-semibold mb-2 text-slate-400"><i
-						class="fa-solid fa-hand fa-fw me-3 text-yellow"></i>สวัสดีครับ
+						class="fa-solid fa-hand fa-fw me-2 text-yellow"></i>สวัสดีครับ
 				</div>
 				<p>ผม นายกร โรจน์รัตนปัญญา ตอนนี้อายุ <?= $ageInYears ?> ปี เป็นคนที่มุ่งมั่นมาก ๆ
 					และตั้งใจทำทุกอย่างเพื่อครอบครัว ความฝันของผมคือต้องการเขียน Open source ให้ทุกคนได้ใช้ฟรี ๆ

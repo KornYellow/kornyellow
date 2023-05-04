@@ -34,7 +34,7 @@ use libraries\kornyellow\instances\methods\KYUser;
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Bootstrap 5.3.0 alpha 2 (Last-Update 28/03/2023) -->
-	<script src="/static/bootstrap/dist/js/bootstrap.bundle.min.js" defer async></script>
+	<script src="/static/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
 
 	<!-- Font Awesome 6 (Last-Update 05/02/2023) -->
 	<link href="/static/fontawesome/css/fontawesome.css" rel="stylesheet">
@@ -51,7 +51,7 @@ use libraries\kornyellow\instances\methods\KYUser;
 	<link rel="manifest" href="/static/kornyellow/favicons/site.webmanifest">
 
 	<!-- Javascript -->
-	<script src="/static/kornyellow/js/script.js" type="text/javascript" defer async></script>
+	<script src="/static/kornyellow/js/script.js" type="text/javascript" defer></script>
 
 	<!-- Canonical -->
 	<link rel="canonical" href="https://kornyellow.com/<?= KornHeader::getCanonical() ?>">
@@ -59,36 +59,38 @@ use libraries\kornyellow\instances\methods\KYUser;
 
 <body class="vh-100 d-flex flex-column bg-slate-900">
 
-<nav class="flex-shrink-0 navbar navbar-expand-lg pb-0">
+<nav class="flex-shrink-0 navbar navbar-expand-lg my-1">
 	<div class="container">
-		<h1>
-			<a class="navbar-brand fs-3 me-2 d-flex align-items-center" title="KORNYELLOW Logo" href="/">
+		<h1 class="mb-0">
+			<a class="navbar-brand fs-3 me-2 h-100 pe-2 d-flex align-items-center" title="KORNYELLOW Logo" href="/">
 				<img width="50" src="/static/kornyellow/images/kornyellow_watermark.png" alt="KORNYELLOW Logo">
-				<span>KORN</span><span class="text-yellow">YELLOW</span>
+				<span class="pt-1">
+					<span>KORN</span><span class="text-yellow">YELLOW</span>
+				</span>
 			</a>
 		</h1>
-		<button class="navbar-toggler" title="Toggle Menu" type="button" data-bs-toggle="collapse"
+		<button class="navbar-toggler fs-1 border-0" title="Toggle Menu" type="button" data-bs-toggle="collapse"
 		        data-bs-target="#navbar">
 			<i class="fa-solid fa-bars fa-fw p-1"></i>
 		</button>
 		<div class="collapse navbar-collapse" id="navbar">
-			<ul class="navbar-nav fw-semibold ms-auto pb-3">
+			<ul class="navbar-nav fw-semibold ms-auto">
 				<li class="nav-item">
-					<a class="nav-link px-2" href="/blogs" title="บทความ">บทความ</a>
+					<a class="nav-link px-3" href="/blogs" title="บทความ">บทความ</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link px-2" href="/about/me" title="รู้จักผมกัน">รู้จักผมกัน</a>
+					<a class="nav-link px-3" href="/about/me" title="รู้จักผมกัน">รู้จักผมกัน</a>
 				</li>
 				<?php if (!KYUser::isLogin()) { ?>
 					<li class="nav-item">
-						<a class="nav-link px-2" href="/login" title="เข้าสู่ระบบ">เข้าสู่ระบบ</a>
+						<a class="nav-link px-3" href="/login" title="เข้าสู่ระบบ">เข้าสู่ระบบ</a>
 					</li>
 				<?php } else { ?>
 					<li class="nav-item">
-						<a class="nav-link px-2" href="/finances" title="จัดการรายจ่าย">จัดการรายจ่าย</a>
+						<a class="nav-link px-3" href="/finances" title="จัดการรายจ่าย">จัดการรายจ่าย</a>
 					</li>
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle text-slate-100 px-2" href="#" role="button"
+						<a class="nav-link dropdown-toggle text-slate-100 px-3" href="#" role="button"
 						   data-bs-toggle="dropdown" title="บัญชี">
 							<i class="fa-solid fa-user fa-fw"></i>
 						</a>

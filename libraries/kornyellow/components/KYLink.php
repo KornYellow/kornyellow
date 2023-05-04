@@ -12,6 +12,6 @@ class KYLink {
 		else
 			$icon = '';
 
-		return '<a class="btn btn-yellow text-nowrap fw-bold" title="'.$text.'" href="'.$href.'">'.$icon.$text.'</a>';
+		return '<a class="btn btn-yellow text-nowrap fw-bold py-1 px-2" title="'.$text.'" href="'.$href.'">'.$icon.$text.'</a>';
 	}
 }

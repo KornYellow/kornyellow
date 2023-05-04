@@ -13,7 +13,7 @@ class KYForm {
 		if (!is_null($icon))
 			$icon = '<i class="fa-solid '.$icon.' me-2 fa-fw"></i>';
 		return '
-			<button type="submit" name="submit" class="btn btn-yellow fw-semibold">
+			<button type="submit" name="submit" class="btn btn-yellow text-nowrap fw-bold py-1 px-2" title="'.$text.'">
 				'.$icon.$text.'
 			</button>
 		';

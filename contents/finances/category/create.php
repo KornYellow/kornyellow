@@ -32,11 +32,9 @@ if (KornRequest::post('submit')->isValid()) {
 ?>
 
 <section>
-	<?= KYHeading::level1('เพิ่มชนิดการเงิน', 'fa-plus', '
-    <div class="row g-1">
-    	<div class="col-12 col-md-auto">'.KYLink::internal('/finances/category', 'ย้อนกลับ', 'fa-rotate-left').'</div>
-    </div>
-	') ?>
+	<?= KYHeading::level1('เพิ่มชนิดการเงิน', 'fa-plus',
+		KYLink::internal('/finances/category', 'ย้อนกลับ', 'fa-rotate-left'),
+	) ?>
 	<form method="post">
 		<div class="mb-3">
 			<label for="name" class="form-label">ชื่อรายการ</label>

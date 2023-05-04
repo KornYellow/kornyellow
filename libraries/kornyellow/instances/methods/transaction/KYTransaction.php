@@ -57,18 +57,20 @@ class KYTransaction extends KYMethod {
 
 		$bind = KornStatement::getEmptyFieldsName(self::$table);
 		while ($bind = $query->nextBind($bind)) {
-			if (is_null($firstIndex))
+			if (is_null($firstIndex)) {
 				$firstIndex = $bind['t_id'];
-			$result[$bind['t_id']] = new Transaction(
-				$bind['t_id'],
-				KYUser::get($bind['t_u_id']),
-				KYTransactionCategory::get($bind['t_tc_id']),
-				$bind['t_name'],
-				$bind['t_note'],
-				EnumTransactionType::create($bind['t_type']),
-				$bind['t_amount'],
-				new KornDateTime($bind['t_datetime']),
-			);
+				$result[$bind['t_id']] = new Transaction(
+					$bind['t_id'],
+					KYUser::get($bind['t_u_id']),
+					KYTransactionCategory::get($bind['t_tc_id']),
+					$bind['t_name'],
+					$bind['t_note'],
+					EnumTransactionType::create($bind['t_type']),
+					$bind['t_amount'],
+					new KornDateTime($bind['t_datetime']),
+				);
+			}
+
 			if (!$isArray)
 				return $result[$firstIndex];
 		}

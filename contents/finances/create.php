@@ -20,7 +20,7 @@ KornHeader::constructHeader('อัปเดตข้อมูลการเง
 if (KornRequest::post('submit')->isValid()) {
 	$dateToday = new KornDateTime();
 
-	$amount = KornRequest::post('amount')->toFloat();
+	$amount = floatval(str_replace(',', '', KornRequest::post('amount')->toString()));
 	$name = KornRequest::post('name')->toString();
 	$type = EnumTransactionType::create(KornRequest::post('type')->toString());
 	$category = KYTransactionCategory::get(KornRequest::post('category')->toInteger());
@@ -67,48 +67,55 @@ $categories .= '<option value="-1">อื่น ๆ</option>';
 ?>
 
 <section>
-	<?= KYHeading::level1('อัปเดตข้อมูลการเงิน', 'fa-pen-to-square', '
-		<div class="row g-1">
-			<div class="col-12 col-md-auto">'.KYLink::internal('/finances', 'ย้อนกลับ', 'fa-rotate-left').'</div>
-		</div>
-	') ?>
+	<?= KYHeading::level1('อัปเดตข้อมูลการเงิน', 'fa-pen-to-square',
+		KYLink::internal('/finances', 'ย้อนกลับ', 'fa-rotate-left'),
+	) ?>
 	<div class="row g-2 mb-5">
 		<div class="col-12">
 			<div class="bg-slate-700 rounded-3 px-2 px-sm-3 py-2 text-nowrap">
 				<div class="text-slate-400 fs-5"><i class="fa-solid fa-wallet fa-fw me-2 text-yellow"></i>เงินคงเหลือ
 				</div>
 				<div class="fs-3">
-					<span class="fw-light">฿</span>
+					<span>฿</span>
 					<span
 						class="fw-semibold"><?= number_format(KYTransaction::reCalculateBalance(KYUser::loggedIn()), 2) ?></span>
 				</div>
 			</div>
 		</div>
 	</div>
-	<?= KYHeading::level2('เพิ่มรายการการเงินใหม่', 'fa-plus') ?>
+	<?= KYHeading::level2('เพิ่มรายการการเงินใหม่') ?>
 	<form method="post" autocomplete="off">
 		<div class="mb-3">
 			<div class="row g-2">
 				<div class="col">
 					<input required type="radio" class="btn-check" name="type" value="outcome" id="typeOutcome"
 					       autocomplete="off" checked>
-					<label class="btn btn-outline-yellow d-block fs-4 fw-semibold py-2" for="typeOutcome">
-						<i class="fa-solid fa-arrow-up fa-fw me-2"></i>รายจ่าย
+					<label class="btn btn-outline-yellow d-block fs-4 fw-bold py-1" for="typeOutcome">
+						<i class="fa-solid fa-cash-register fa-fw me-2"></i>รายจ่าย
 					</label>
 				</div>
 				<div class="col">
 					<input required type="radio" class="btn-check" name="type" value="income" id="typeIncome"
 					       autocomplete="off">
-					<label class="btn btn-outline-yellow d-block fs-4 fw-semibold py-2" for="typeIncome">
-						<i class="fa-solid fa-arrow-down fa-fw me-2"></i>รายรับ
+					<label class="btn btn-outline-yellow d-block fs-4 fw-bold py-1" for="typeIncome">
+						<i class="fa-solid fa-wallet fa-fw me-2"></i>รายรับ
 					</label>
 				</div>
 			</div>
 		</div>
-		<div class="mb-3">
-			<label for="amount" class="form-label">เป็นจำนวนเงิน</label>
-			<input type="number" required class="form-control" name="amount" id="amount" placeholder="100.00"
-			       step="0.01" autocomplete="off"/>
+		<div class="row g-2 mb-3">
+			<div class="col">
+				<label for="name" class="form-label">ชื่อรายการ</label>
+				<input type="text" required class="form-control" name="name" id="name"
+				       placeholder="รายการการเงิน" autocomplete="off"/>
+			</div>
+			<div class="col">
+				<label for="amount" class="form-label">เป็นจำนวนเงิน</label>
+				<div class="input-baht">
+					<input type="text" required class="form-control" name="amount" id="amount" placeholder="0.00"
+					       autocomplete="off"/>
+				</div>
+			</div>
 		</div>
 		<div class="mb-3">
 			<label for="category" class="form-label">ชนิดของการเงิน</label>
@@ -117,26 +124,21 @@ $categories .= '<option value="-1">อื่น ๆ</option>';
 			</select>
 		</div>
 		<div class="mb-3">
-			<label for="name" class="form-label">ชื่อรายการ</label>
-			<input type="text" required class="form-control" name="name" id="name"
-			       placeholder="ข้าวขาหมู, ขนม, น้ำเปล่า" autocomplete="off"/>
-		</div>
-		<div class="mb-3">
 			<div class="row row-cols-auto g-2">
 				<div class="col">
 					<input required type="radio" class="btn-check" name="date" value="today" id="dateToday"
 					       autocomplete="off" checked>
-					<label class="btn btn-outline-yellow fw-semibold" for="dateToday">วันนี้</label>
+					<label class="btn btn-outline-yellow py-1 text-nowrap fw-bold" for="dateToday">วันนี้</label>
 				</div>
 				<div class="col">
 					<input required type="radio" class="btn-check" name="date" value="onedayago" id="dateYesterday"
 					       autocomplete="off">
-					<label class="btn btn-outline-yellow fw-semibold" for="dateYesterday">เมื่อวาน</label>
+					<label class="btn btn-outline-yellow py-1 text-nowrap fw-bold" for="dateYesterday">เมื่อวาน</label>
 				</div>
 				<div class="col">
 					<input required type="radio" class="btn-check" name="date" value="twodayago" id="dateTwoDayAgo"
 					       autocomplete="off">
-					<label class="btn btn-outline-yellow fw-semibold" for="dateTwoDayAgo">เมื่อวานซืน</label>
+					<label class="btn btn-outline-yellow py-1 text-nowrap fw-bold" for="dateTwoDayAgo">เมื่อวานซืน</label>
 				</div>
 			</div>
 		</div>

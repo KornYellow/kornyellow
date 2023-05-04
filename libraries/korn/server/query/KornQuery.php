@@ -13,10 +13,12 @@ class KornQuery {
 
 	private int $affectedRows;
 	private int $insertedID;
+
 	public function __construct(KornQueryBuilder $queryBuilder = null) {
 		if ($queryBuilder)
 			self::query($queryBuilder->build());
 	}
+
 	private function query(string $query): void {
 		$statement = KornStatement::prepare($query);
 		KornPerformance::queryCountIncrease();
@@ -33,6 +35,7 @@ class KornQuery {
 		foreach ($fields as $field)
 			$this->fieldsName[] = $field->name;
 	}
+
 	public function affectedRows(): int {
 		return $this->affectedRows;
 	}

@@ -19938,6 +19938,13 @@ progress {
   --bs-dropdown-link-color: #A8A29E;
   --bs-dropdown-link-hover-bg: #44403C;
   --bs-dropdown-link-hover-color: #E7E5E4;
+  padding: 0.5em;
+}
+:root .dropdown-menu .dropdown-item,
+[data-bs-theme=light] .dropdown-menu .dropdown-item,
+[data-bs-theme=dark] .dropdown-menu .dropdown-item {
+  border-radius: 0.5em;
+  padding: 0.25em 0.8em;
 }
 
 [type=submit].fake-disable {
@@ -19962,6 +19969,14 @@ body {
   font-family: "IBM Plex Sans Thai", sans-serif;
   letter-spacing: 0.01em;
   line-height: 2.2em;
+}
+
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+* *::-webkit-scrollbar {
+  display: none;
 }
 
 * {
@@ -20160,6 +20175,20 @@ body {
   color: #78716C !important;
 }
 
+.input-baht {
+  position: relative;
+}
+.input-baht::after {
+  background-color: #292524 !important;
+  color: #78716C !important;
+  content: "บาท";
+  font-weight: 600;
+  padding-left: 0.5em;
+  position: absolute;
+  right: 0.8em;
+  top: 1px;
+}
+
 /* LINKS AND BUTTONS */
 .link-yellow {
   color: #F59E0B !important;
@@ -20169,8 +20198,9 @@ body {
   color: #FBBF24 !important;
 }
 
-a:focus, button:focus {
-  outline: 2px solid #D6D3D1 !important;
+a:focus, button:focus, a:focus-visible, button:focus-visible {
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 .btn-yellow {
