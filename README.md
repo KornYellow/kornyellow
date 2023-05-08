@@ -1,11 +1,11 @@
-<table style="border: none">
+<table>
 	<tr>
-		<td width="48%">
-			<img alt="Banner image" src="gruvbox.png"/>
-		</td>
 		<td width="52%">
 			<img alt="Github's stats" src="https://github-readme-stats.vercel.app/api?username=kornyellow&show_icons=true&theme=gruvbox">
 			<img alt="Github's stats" src="https://github-readme-streak-stats.herokuapp.com/?user=kornyellow&theme=gruvbox">
+		</td>
+		<td width="48%">
+			<img alt="Banner image" src="gruvbox.png"/>
 		</td>
 	</tr>
 </table>
