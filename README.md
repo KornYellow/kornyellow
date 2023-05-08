@@ -1,12 +1,14 @@
-<p align="middle">
-	<p float="left">
-		<img width="50%" alt="Banner image" src="gruvbox.png"/>
-	</p>
-	<p float="right">
-		<img width="50%" alt="Github's stats" src="https://github-readme-stats.vercel.app/api?username=kornyellow&show_icons=true&theme=gruvbox">
-		<img width="50%" alt="Github's stats" src="https://github-readme-streak-stats.herokuapp.com/?user=kornyellow&theme=gruvbox">
-	</p>
-</p>
+<table style="border: none">
+	<tr>
+		<td width="48%">
+			<img alt="Banner image" src="gruvbox.png"/>
+		</td>
+		<td width="52%">
+			<img alt="Github's stats" src="https://github-readme-stats.vercel.app/api?username=kornyellow&show_icons=true&theme=gruvbox">
+			<img alt="Github's stats" src="https://github-readme-streak-stats.herokuapp.com/?user=kornyellow&theme=gruvbox">
+		</td>
+	</tr>
+</table>
 
 # Hi!
 
