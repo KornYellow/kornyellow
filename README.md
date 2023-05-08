@@ -1,9 +1,7 @@
-<div style="display: flex;">
-	<div><img alt="Banner image" src="gruvbox.png"/></div>
-	<div>
-		<a href="https://github.com/kornyellow"><img alt="Github's stats" src="https://github-readme-stats.vercel.app/api?username=kornyellow&show_icons=true&theme=gruvbox"></a>
-		<a href="https://github.com/kornyellow"><img alt="Github's stats" src="https://github-readme-streak-stats.herokuapp.com/?user=kornyellow&theme=gruvbox"></a>
-	</div>
+<img style="width: 50%" alt="Banner image" src="gruvbox.png"/>
+<div style="width: 50%">
+	<a href="https://github.com/kornyellow"><img alt="Github's stats" src="https://github-readme-stats.vercel.app/api?username=kornyellow&show_icons=true&theme=gruvbox"></a>
+	<a href="https://github.com/kornyellow"><img alt="Github's stats" src="https://github-readme-streak-stats.herokuapp.com/?user=kornyellow&theme=gruvbox"></a>
 </div>
 
 # Hi!
