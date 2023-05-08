@@ -1,6 +1,8 @@
-|                                             |                                                                                                                                                                                                                                               |
-|---------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img alt="Banner image" src="gruvbox.png"/> | <img alt="Github's stats" src="https://github-readme-stats.vercel.app/api?username=kornyellow&show_icons=true&theme=gruvbox"><img alt="Github's stats" src="https://github-readme-streak-stats.herokuapp.com/?user=kornyellow&theme=gruvbox"> |
+<p align="middle">
+	<img width="50%" alt="Banner image" src="gruvbox.png"/>
+	<img width="50%" alt="Github's stats" src="https://github-readme-stats.vercel.app/api?username=kornyellow&show_icons=true&theme=gruvbox">
+	<img width="50%" alt="Github's stats" src="https://github-readme-streak-stats.herokuapp.com/?user=kornyellow&theme=gruvbox">
+</p>
 
 # Hi!
 
