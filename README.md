@@ -1,6 +1,6 @@
 <img style="float: right; width: 50%" alt="Banner image" src="gruvbox.png"/>
-<a style="float:left; width: 50%" href="https://github.com/kornyellow"><img alt="Github's stats" src="https://github-readme-stats.vercel.app/api?username=kornyellow&show_icons=true&theme=gruvbox"></a>
-<a style="float:left; width: 50%" href="https://github.com/kornyellow"><img alt="Github's stats" src="https://github-readme-streak-stats.herokuapp.com/?user=kornyellow&theme=gruvbox"></a>
+<img style="float: left; width: 50%" alt="Github's stats" src="https://github-readme-stats.vercel.app/api?username=kornyellow&show_icons=true&theme=gruvbox">
+<img style="float: left; width: 50%" alt="Github's stats" src="https://github-readme-streak-stats.herokuapp.com/?user=kornyellow&theme=gruvbox">
 
 # Hi!
 
