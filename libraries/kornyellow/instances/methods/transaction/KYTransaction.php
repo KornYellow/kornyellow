@@ -15,7 +15,7 @@ use libraries\kornyellow\instances\KYMethod;
 use libraries\kornyellow\instances\methods\KYUser;
 
 class KYTransaction extends KYMethod {
-	protected static string $table = 'transaction';
+	protected static string $table = "transaction";
 	protected static array $getCache = [];
 	public static function browse(string $query, int $limit = 15, int $offset = 0): array {
 		// TODO: Implement browse() method.
@@ -57,19 +57,19 @@ class KYTransaction extends KYMethod {
 
 		$bind = KornStatement::getEmptyFieldsName(self::$table);
 		while ($bind = $query->nextBind($bind)) {
-			if (is_null($firstIndex)) {
-				$firstIndex = $bind['t_id'];
-				$result[$bind['t_id']] = new Transaction(
-					$bind['t_id'],
-					KYUser::get($bind['t_u_id']),
-					KYTransactionCategory::get($bind['t_tc_id']),
-					$bind['t_name'],
-					$bind['t_note'],
-					EnumTransactionType::create($bind['t_type']),
-					$bind['t_amount'],
-					new KornDateTime($bind['t_datetime']),
-				);
-			}
+			if (is_null($firstIndex))
+				$firstIndex = $bind["t_id"];
+
+			$result[$bind["t_id"]] = new Transaction(
+				$bind["t_id"],
+				KYUser::get($bind["t_u_id"]),
+				KYTransactionCategory::get($bind["t_tc_id"]),
+				$bind["t_name"],
+				$bind["t_note"],
+				EnumTransactionType::create($bind["t_type"]),
+				$bind["t_amount"],
+				new KornDateTime($bind["t_datetime"]),
+			);
 
 			if (!$isArray)
 				return $result[$firstIndex];
@@ -82,21 +82,21 @@ class KYTransaction extends KYMethod {
 		if (array_key_exists($id, self::$getCache))
 			return self::$getCache[$id];
 		$select = new KornQuerySelect(self::$table);
-		$select->where('t_id', $id);
+		$select->where("t_id", $id);
 
 		return self::$getCache[$id] = self::processObject(new KornQuery($select));
 	}
 	public static function add(KYInstance|Transaction $instance): int {
 		$replace = new KornQueryReplace(self::$table);
 		$values = [
-			't_id' => $instance->getID(),
-			't_u_id' => $instance->getUser()->getID(),
-			't_tc_id' => $instance->getTransactionCategory()?->getID(),
-			't_name' => $instance->getName(),
-			't_note' => $instance->getNote(),
-			't_type' => $instance->getTransactionType()->getID(),
-			't_amount' => $instance->getAmount(),
-			't_datetime' => $instance->getDateTime()->toMySQLDateTime(),
+			"t_id" => $instance->getID(),
+			"t_u_id" => $instance->getUser()->getID(),
+			"t_tc_id" => $instance->getTransactionCategory()?->getID(),
+			"t_name" => $instance->getName(),
+			"t_note" => $instance->getNote(),
+			"t_type" => $instance->getTransactionType()->getID(),
+			"t_amount" => $instance->getAmount(),
+			"t_datetime" => $instance->getDateTime()->toMySQLDateTime(),
 		];
 		$replace->values($values);
 
@@ -116,10 +116,10 @@ class KYTransaction extends KYMethod {
 	}
 	public static function getByDay(KornDateTime $day, User $user): array|null {
 		$select = new KornQuerySelect(self::$table);
-		$select->whereDateInDay('t_datetime', $day);
+		$select->whereDateInDay("t_datetime", $day);
 		$select->whereAnd();
-		$select->where('t_u_id', $user->getID());
-		$select->sortByColumn('t_datetime');
+		$select->where("t_u_id", $user->getID());
+		$select->sortByColumn("t_datetime");
 		$select->sortDescending();
 
 		return self::processObject(new KornQuery($select), true);
@@ -137,10 +137,10 @@ class KYTransaction extends KYMethod {
 	}
 	public static function getByMonth(KornDateTime $month, User $user): array|null {
 		$select = new KornQuerySelect(self::$table);
-		$select->whereDateInMonth('t_datetime', $month);
+		$select->whereDateInMonth("t_datetime", $month);
 		$select->whereAnd();
-		$select->where('t_u_id', $user->getID());
-		$select->sortByColumn('t_datetime');
+		$select->where("t_u_id", $user->getID());
+		$select->sortByColumn("t_datetime");
 		$select->sortDescending();
 
 		return self::processObject(new KornQuery($select), true);
@@ -158,10 +158,10 @@ class KYTransaction extends KYMethod {
 	}
 	public static function getByYear(KornDateTime $year, User $user): array|null {
 		$select = new KornQuerySelect(self::$table);
-		$select->whereDateInYear('t_datetime', $year);
+		$select->whereDateInYear("t_datetime", $year);
 		$select->whereAnd();
-		$select->where('t_u_id', $user->getID());
-		$select->sortByColumn('t_datetime');
+		$select->where("t_u_id", $user->getID());
+		$select->sortByColumn("t_datetime");
 		$select->sortDescending();
 
 		return self::processObject(new KornQuery($select), true);

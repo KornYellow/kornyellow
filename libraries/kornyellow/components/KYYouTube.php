@@ -13,9 +13,9 @@ class KYYouTube {
 	 */
 	public static function getYoutubeVideo(int $count = 1): YouTubeVideo|array {
 		$apiKey = KornCredential::getAPIKeyYoutube();
-		$channelID = 'UCSgUwlFlKYQXEh5BIs1OsKQ';
+		$channelID = "UCSgUwlFlKYQXEh5BIs1OsKQ";
 
-		$apiURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId='.$channelID.'&maxResults='.$count.'&order=date&type=video&key='.$apiKey;
+		$apiURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=$channelID&maxResults=$count&order=date&type=video&key=$apiKey";
 
 		$response = file_get_contents($apiURL);
 		$json = json_decode($response);

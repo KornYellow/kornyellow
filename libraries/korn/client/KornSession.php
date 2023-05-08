@@ -13,7 +13,7 @@ class KornSession {
 	}
 	public static function read(string $key): string {
 		if (!isset($_SESSION[$key]))
-			return '';
+			return "";
 
 		return $_SESSION[$key];
 	}

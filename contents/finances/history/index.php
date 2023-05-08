@@ -11,16 +11,20 @@ use libraries\kornyellow\components\KYTransactionHistory;
 use libraries\kornyellow\instances\methods\KYUser;
 use libraries\kornyellow\instances\methods\transaction\KYTransaction;
 
-KornHeader::constructHeader('ประวัติการเงิน');
+KornHeader::constructHeader("ประวัติการเงิน");
 
-$transactionsDisplay = '';
+$transactionsDisplay = "";
 
 function getByDays(int $dayCount, KornDateTime $startDay = new KornDateTime()): string {
-	$transactionsDisplay = '';
+	$transactionsDisplay = "";
 	for ($i = 0; $i < $dayCount; $i++) {
 		$transactions = KYTransaction::getByDay($startDay, KYUser::loggedIn());
 		if (!is_null($transactions)) {
-			$transactionsDisplay .= '<div class="col-12 fw-semibold fs-5 text-yellow">'.$startDay->toStringShortThai().'</div>';
+			$transactionsDisplay .= "
+				<div class='col-12 fw-semibold fs-5 text-yellow'>
+					{$startDay->toStringShortThai()}
+				</div>
+			";
 			$transactionsDisplay .= KYTransactionHistory::getHistoryBars($transactions);
 		}
 		$startDay->modifyDay(-1);
@@ -28,17 +32,17 @@ function getByDays(int $dayCount, KornDateTime $startDay = new KornDateTime()): 
 	return $transactionsDisplay;
 }
 
-$request = KornRequest::get('timespan');
+$request = KornRequest::get("timespan");
 $requestText = null;
-$transactionHeader = 'ภายในเจ็ดวันที่ผ่านมา';
+$transactionHeader = "ภายในเจ็ดวันที่ผ่านมา";
 $transactionsDisplay = getByDays(7);
 
 if ($request->isValid()) {
 	$requestText = $request->toString();
 	$dateToday = new KornDateTime();
 
-	if ($requestText == 'lastmonth') {
-		$transactionHeader = 'ภายในเดือนที่แล้ว';
+	if ($requestText == "lastmonth") {
+		$transactionHeader = "ภายในเดือนที่แล้ว";
 		$dateMonth = new KornDateTime();
 		$dateMonth = $dateMonth->modifyMonth(-1);
 		$dateToday = $dateToday->modifyMonth(-1);
@@ -54,8 +58,8 @@ if ($request->isValid()) {
 
 		$transactionsDisplay = getByDays($dateCount, $dateToday);
 
-	} else if ($requestText == 'thismonth') {
-		$transactionHeader = 'ภายในเดือนนี้';
+	} else if ($requestText == "thismonth") {
+		$transactionHeader = "ภายในเดือนนี้";
 		$dateMonth = new KornDateTime();
 
 		while ($dateMonth->getDate() != 1)
@@ -72,19 +76,19 @@ if ($request->isValid()) {
 
 		$transactionsDisplay = getByDays($dateCount, $dateToday);
 
-	} else if ($requestText == 'fourteendays') {
-		$transactionHeader = 'ภายในสิบสี่วันที่ผ่านมา';
+	} else if ($requestText == "fourteendays") {
+		$transactionHeader = "ภายในสิบสี่วันที่ผ่านมา";
 		$transactionsDisplay = getByDays(14);
 	}
 }
-if ($transactionsDisplay == '')
+if ($transactionsDisplay == "")
 	$transactionsDisplay = KYTransactionHistory::historyEmpty();
 
 ?>
 
 <section>
-	<?= KYHeading::level1('ประวัติการเงิน', 'fa-clock-rotate-left',
-		KYLink::internal('/finances', 'ย้อนกลับ', 'fa-rotate-left'),
+	<?= KYHeading::level1("ประวัติการเงิน", "fa-clock-rotate-left",
+		KYLink::internal("/finances", "ย้อนกลับ", "fa-rotate-left"),
 	) ?>
 	<div class="row g-2 mb-3">
 		<div class="col-12">
@@ -93,8 +97,9 @@ if ($transactionsDisplay == '')
 				</div>
 				<div class="fs-3">
 					<span>฿</span>
-					<span
-						class="fw-semibold"><?= number_format(KYTransaction::reCalculateBalance(KYUser::loggedIn()), 2) ?></span>
+					<span class="fw-semibold">
+						<?= number_format(KYTransaction::reCalculateBalance(KYUser::loggedIn()), 2) ?>
+					</span>
 				</div>
 			</div>
 		</div>
@@ -103,19 +108,19 @@ if ($transactionsDisplay == '')
 		<form method="get" autocomplete="off">
 			<div class="d-flex gap-2 overflow-x-scroll">
 				<button name="timespan" value="sevendays" type="submit"
-				        class="btn btn-outline-yellow py-1 text-nowrap fw-bold <?= is_null($requestText) || $requestText == 'sevendays' ? 'active' : '' ?>">
+				        class="btn btn-outline-yellow py-1 text-nowrap fw-bold <?= is_null($requestText) || $requestText == "sevendays" ? "active" : "" ?>">
 					ภายในเจ็ดวันที่ผ่านมา
 				</button>
 				<button name="timespan" value="fourteendays" type="submit"
-				        class="btn btn-outline-yellow py-1 text-nowrap fw-bold <?= $requestText == 'fourteendays' ? 'active' : '' ?>">
+				        class="btn btn-outline-yellow py-1 text-nowrap fw-bold <?= $requestText == "fourteendays" ? "active" : "" ?>">
 					ภายในสิบสี่วันที่ผ่านมา
 				</button>
 				<button name="timespan" value="thismonth" type="submit"
-				        class="btn btn-outline-yellow py-1 text-nowrap fw-bold <?= $requestText == 'thismonth' ? 'active' : '' ?>">
+				        class="btn btn-outline-yellow py-1 text-nowrap fw-bold <?= $requestText == "thismonth" ? "active" : "" ?>">
 					ภายในเดือนนี้
 				</button>
 				<button name="timespan" value="lastmonth" type="submit"
-				        class="btn btn-outline-yellow py-1 text-nowrap fw-bold <?= $requestText == 'lastmonth' ? 'active' : '' ?>">
+				        class="btn btn-outline-yellow py-1 text-nowrap fw-bold <?= $requestText == "lastmonth" ? "active" : "" ?>">
 					ภายในเดือนที่แล้ว
 				</button>
 			</div>

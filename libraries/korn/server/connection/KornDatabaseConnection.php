@@ -13,7 +13,7 @@ class KornDatabaseConnection {
 
 	public static function getDatabase(): mysqli {
 		if (KornNetwork::isLocalHost())
-			return self::getConnection('root', '', KornConfig::$databaseBeta);
+			return self::getConnection("root", "", KornConfig::$databaseBeta);
 
 		return self::getConnection(
 			KornCredential::getDatabaseUsername(),
@@ -31,9 +31,9 @@ class KornDatabaseConnection {
 
 		$connection = mysqli_init();
 
-		if (!$connection->real_connect('p:localhost', $username, $password, $databaseName))
-			KornDebug::printError('ERROR: MySQL connection error', mysqli_connect_error());
-		$connection->set_charset('utf8');
+		if (!$connection->real_connect("p:localhost", $username, $password, $databaseName))
+			KornDebug::printError("ERROR: MySQL connection error", mysqli_connect_error());
+		$connection->set_charset("utf8");
 
 		self::$connection = $connection;
 		return $connection;

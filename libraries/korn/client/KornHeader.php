@@ -12,7 +12,7 @@ class KornHeader {
 	public static function getTitle(): string {
 		$title = self::$title ?? KornConfig::$defaultTitle;
 		if ($title !== KornConfig::$defaultTitle) {
-			$title .= ' | '.self::getWebsiteName();
+			$title .= " | ".self::getWebsiteName();
 		} else {
 			$title = self::getWebsiteName();
 		}
@@ -49,6 +49,6 @@ class KornHeader {
 		self::$description = $description ?? KornConfig::$defaultDescription;
 		self::$abstract = $abstract ?? KornConfig::$defaultAbstract;
 
-		include('controller/header.php');
+		include("controller/header.php");
 	}
 }

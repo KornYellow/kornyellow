@@ -20135,6 +20135,24 @@ body {
   line-height: 6em !important;
 }
 
+/* CHARTS */
+.chart-bar .chart-container {
+  gap: 2px;
+}
+.chart-bar .chart-container .bar {
+  background-color: #E7E5E4;
+  border-radius: 0.5em 0.5em 0 0;
+}
+.chart-bar .chart-container .bar.active {
+  background-color: #F59E0B;
+}
+
+/* TOOLTIPS */
+.tooltip {
+  font-family: "IBM Plex Sans Thai", sans-serif;
+  font-weight: bold;
+}
+
 /* IMAGES */
 .img-square {
   overflow: hidden;

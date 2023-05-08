@@ -13,7 +13,7 @@ use libraries\kornyellow\instances\KYMethod;
 use libraries\kornyellow\instances\methods\KYUser;
 
 class KYTransactionCategory extends KYMethod {
-	protected static string $table = 'transaction_category';
+	protected static string $table = "transaction_category";
 	protected static array $getCache = [];
 	protected static array $getByUserCache = [];
 	public static function browse(string $query, int $limit = 15, int $offset = 0): array {
@@ -23,10 +23,10 @@ class KYTransactionCategory extends KYMethod {
 	public static function add(KYInstance|TransactionCategory $instance): int {
 		$replace = new KornQueryReplace(self::$table);
 		$values = [
-			'tc_id' => $instance->getID(),
-			'tc_u_id' => $instance->getUser()->getID(),
-			'tc_name' => $instance->getName(),
-			'tc_amount' => $instance->getNote(),
+			"tc_id" => $instance->getID(),
+			"tc_u_id" => $instance->getUser()->getID(),
+			"tc_name" => $instance->getName(),
+			"tc_amount" => $instance->getNote(),
 		];
 		$replace->values($values);
 
@@ -54,12 +54,12 @@ class KYTransactionCategory extends KYMethod {
 		$bind = KornStatement::getEmptyFieldsName(self::$table);
 		while ($bind = $query->nextBind($bind)) {
 			if (is_null($firstIndex))
-				$firstIndex = $bind['tc_id'];
-			$result[$bind['tc_id']] = new TransactionCategory(
-				$bind['tc_id'],
-				KYUser::get($bind['tc_u_id']),
-				$bind['tc_name'],
-				$bind['tc_note']
+				$firstIndex = $bind["tc_id"];
+			$result[$bind["tc_id"]] = new TransactionCategory(
+				$bind["tc_id"],
+				KYUser::get($bind["tc_u_id"]),
+				$bind["tc_name"],
+				$bind["tc_note"]
 			);
 			if (!$isArray)
 				return $result[$firstIndex];
@@ -72,7 +72,7 @@ class KYTransactionCategory extends KYMethod {
 		if (array_key_exists($id, self::$getCache))
 			return self::$getCache[$id];
 		$select = new KornQuerySelect(self::$table);
-		$select->where('tc_id', $id);
+		$select->where("tc_id", $id);
 
 		return self::$getCache[$id] = self::processObject(new KornQuery($select));
 	}
@@ -80,7 +80,7 @@ class KYTransactionCategory extends KYMethod {
 		if (array_key_exists($user->getID(), self::$getByUserCache))
 			return self::$getByUserCache[$user->getID()];
 		$select = new KornQuerySelect(self::$table);
-		$select->where('tc_u_id', $user->getID());
+		$select->where("tc_u_id", $user->getID());
 
 		return self::$getByUserCache[$user->getID()] = self::processObject(new KornQuery($select), true);
 	}

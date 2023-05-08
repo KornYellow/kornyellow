@@ -6,7 +6,7 @@ use libraries\korn\server\connection\KornFTPConnection;
 use libraries\korn\utils\KornPerformance;
 
 class KornFTP {
-	public static string $remoteBaseDir = '/domains/kornyellow.com/public_html';
+	public static string $remoteBaseDir = "/domains/kornyellow.com/public_html";
 
 	public static function reuploadProjectToProduction(): void {
 		self::removeAllFilesFromRemote();
@@ -15,18 +15,18 @@ class KornFTP {
 	}
 
 	public static function removeAllFilesFromRemote(): void {
-		echo "\n\033[32m".'Start removing all files from '.self::$remoteBaseDir.' please wait...'."\n";
+		echo "\n\033[32mStart removing all files from ".self::$remoteBaseDir." please wait...\n";
 		KornPerformance::startMeasureLoadTime();
 		self::removeAllFilesFromRemoteDir(self::$remoteBaseDir);
 		KornPerformance::stopMeasureLoadTime();
-		echo "\033[33m".'All files removed from '.self::$remoteBaseDir.', taking '.KornPerformance::getMeasuredLoadTime().' seconds'."\n";
+		echo "\033[33mAll files removed from ".self::$remoteBaseDir.", taking ".KornPerformance::getMeasuredLoadTime()." seconds\n";
 	}
 
 	private static function removeAllFilesFromRemoteDir(string $remotePath): void {
 		$files = ftp_nlist(KornFTPConnection::getFTP(), $remotePath);
 		if (is_array($files)) {
 			foreach ($files as $file) {
-				if (basename($file) === '.' || basename($file) === '..') {
+				if (basename($file) === "." || basename($file) === "..") {
 					continue;
 				}
 
@@ -34,12 +34,13 @@ class KornFTP {
 					self::removeAllFilesFromRemoteDir($file);
 				} else {
 					ftp_delete(KornFTPConnection::getFTP(), $file);
-					echo "\033[31m".'File '.basename($file).' has been removed from '.$file."\n";
+					$baseFile = basename($file);
+					echo "\033[31mFile $baseFile has been removed from $file\n";
 				}
 			}
 			if (self::$remoteBaseDir != $remotePath)
 				if (ftp_rmdir(KornFTPConnection::getFTP(), $remotePath))
-					echo "\033[31m".'Directory '.$remotePath.' has been removed'."\n";
+					echo "\033[31mDirectory $remotePath has been removed\n";
 		}
 	}
 
@@ -47,33 +48,34 @@ class KornFTP {
 		$localBaseDir = getcwd();
 
 		$excludeList = [
-			'.git',
-			'.gitignore',
-			'.idea',
-			'composer.json',
-			'composer.lock',
-			'composer.phar',
-			'gruvbox.png',
-			'README.md',
-			'update.php',
-			'reupload.php',
+			".git",
+			".gitignore",
+			".idea",
+			"composer.json",
+			"composer.lock",
+			"composer.phar",
+			"gruvbox.png",
+			"README.md",
+			"update.php",
+			"reupload.php",
 		];
 
-		echo "\n\033[32m".'Start updating project please wait...'."\n";
+		echo "\n\033[32mStart updating project please wait...\n";
 		KornPerformance::startMeasureLoadTime();
 		self::uploadFilesAndDirectories($localBaseDir, self::$remoteBaseDir, $excludeList);
 		KornPerformance::stopMeasureLoadTime();
-		echo "\033[33m".'Update project completed, taking '.KornPerformance::getMeasuredLoadTime().' seconds'."\n";
+		echo "\033[33mUpdate project completed, taking ".KornPerformance::getMeasuredLoadTime()." seconds\n";
 	}
 
 	private static function uploadFilesAndDirectories(string $localPath, string $remotePath, array $excludeList = []): void {
 		if (!@ftp_chdir(KornFTPConnection::getFTP(), $remotePath)) {
 			ftp_mkdir(KornFTPConnection::getFTP(), $remotePath);
-			echo "\033[38;5;208m".'Directory '.basename($localPath).' has been created at '.$remotePath."\n";
+			$baseLocalPath = basename($localPath);
+			echo "\033[38;5;208mDirectory $baseLocalPath has been created at $remotePath\n";
 			ftp_chdir(KornFTPConnection::getFTP(), $remotePath);
 		}
 
-		$files = array_diff(scandir($localPath), ['.', '..']);
+		$files = array_diff(scandir($localPath), [".", ".."]);
 		foreach ($files as $file) {
 			$localFile = "$localPath/$file";
 			$remoteFile = "$remotePath/$file";
@@ -91,7 +93,8 @@ class KornFTP {
 					continue;
 
 				ftp_put(KornFTPConnection::getFTP(), $remoteFile, $localFile);
-				echo "\033[34m".'File '.basename($localFile).' has been uploaded at '.$remoteFile."\n";
+				$baseLocalFile = basename($localFile);
+				echo "\033[34mFile $baseLocalFile has been uploaded at $remoteFile\n";
 			}
 		}
 	}

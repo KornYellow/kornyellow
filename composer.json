@@ -1,21 +1,21 @@
 {
-	"name": "korn/kornyellow",
-	"description": "Portfolio website",
-	"type": "project",
-	"license": "proprietary",
-	"autoload": {
-		"psr-4": {
-			"libraries\\": "libraries"
-		}
-	},
-	"authors": [
-		{
-			"name": "kornyellow",
-			"email": "kornkubzaza@gmail.com"
-		}
-	],
-	"require": {
-		"ext-mysqli": "*",
-		"ext-ftp": "*"
-	}
+  "name": "korn/kornyellow",
+  "description": "Portfolio website",
+  "type": "project",
+  "license": "proprietary",
+  "autoload": {
+    "psr-4": {
+      "libraries\\": "libraries"
+    }
+  },
+  "authors": [
+    {
+      "name": "kornyellow",
+      "email": "kornkubzaza@gmail.com"
+    }
+  ],
+  "require": {
+    "ext-mysqli": "*",
+    "ext-ftp": "*"
+  }
 }

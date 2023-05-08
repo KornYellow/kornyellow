@@ -25,10 +25,10 @@ class KornFTPConnection {
 			return self::$connection;
 
 		if (!$connection = ftp_connect($ftpServer))
-			KornDebug::printError('ERROR: FTP Server connection error');
+			KornDebug::printError("ERROR: FTP Server connection error");
 
 		if (!$login = ftp_login($connection, $username, $password))
-			KornDebug::printError('ERROR: FTP Server login error');
+			KornDebug::printError("ERROR: FTP Server login error");
 
 		self::$connection = $connection;
 		return $connection;

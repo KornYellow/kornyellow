@@ -24,9 +24,17 @@ readonly class YouTubeVideo {
 	}
 
 	public function getThumbnailImage(int $width = 1920, int $height = 1080): string {
-		return '<div class="yt-thumbnail"><img class="img-fluid" alt="'.$this->title.'" src="'.$this->thumbnail.'" width="'.$width.'" height="'.$height.'"></div>';
+		return "
+			<div class='yt-thumbnail'>
+				<img class='img-fluid' alt='$this->title' src='$this->thumbnail' width='$width' height='$height'>
+			</div>
+		";
 	}
 	public function getFrame(): string {
-		return '<div class="iframe-responive"><iframe src="https://www.youtube.com/embed/'.$this->id.'" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>';
+		return "
+			<div class='iframe-responive'>
+				<iframe src='https://www.youtube.com/embed/$this->id' allow='autoplay; encrypted-media' allowfullscreen></iframe>
+			</div>
+		";
 	}
 }

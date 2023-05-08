@@ -14,26 +14,26 @@ use libraries\kornyellow\instances\methods\KYUser;
 use libraries\kornyellow\instances\methods\transaction\KYTransaction;
 use libraries\kornyellow\instances\methods\transaction\KYTransactionCategory;
 
-KornHeader::constructHeader('แก้ไขชนิดการเงิน');
+KornHeader::constructHeader("แก้ไขชนิดการเงิน");
 
-if (KornRequest::get('id')->isNull())
-	KornNetwork::redirectPage('/finances');
+if (KornRequest::get("id")->isNull())
+	KornNetwork::redirectPage("/finances");
 
-$transaction = KYTransaction::get(KornRequest::get('id')->toInteger());
+$transaction = KYTransaction::get(KornRequest::get("id")->toInteger());
 
-if (KornRequest::post('submit')->isValid()) {
-	$amount = floatval(str_replace(',', '', KornRequest::post('amount')->toString()));
-	$name = KornRequest::post('name')->toString();
-	$type = EnumTransactionType::create(KornRequest::post('type')->toString());
-	$category = KYTransactionCategory::get(KornRequest::post('category')->toInteger());
-	$note = KornRequest::post('note')->toStringNullable();
+if (KornRequest::post("submit")->isValid()) {
+	$amount = floatval(str_replace(",", "", KornRequest::post("amount")->toString()));
+	$name = KornRequest::post("name")->toString();
+	$type = EnumTransactionType::create(KornRequest::post("type")->toString());
+	$category = KYTransactionCategory::get(KornRequest::post("category")->toInteger());
+	$note = KornRequest::post("note")->toStringNullable();
 
-	$date = KornRequest::post('date')->toString();
-	$hour = KornRequest::post('timeHour')->toInteger();
-	$minute = KornRequest::post('timeMinute')->toInteger();
-	$second = KornRequest::post('timeSecond')->toInteger();
-	$time = $hour.':'.$minute.':'.$second;
-	$dateTime = new KornDateTime($date.' '.$time);
+	$date = KornRequest::post("date")->toString();
+	$hour = KornRequest::post("timeHour")->toInteger();
+	$minute = KornRequest::post("timeMinute")->toInteger();
+	$second = KornRequest::post("timeSecond")->toInteger();
+	$time = $hour.":".$minute.":".$second;
+	$dateTime = new KornDateTime($date." ".$time);
 
 	$transaction->setAmount($amount);
 	$transaction->setName($name);
@@ -44,24 +44,34 @@ if (KornRequest::post('submit')->isValid()) {
 
 	KYTransaction::add($transaction);
 
-	KornNetwork::redirectPage('/finances');
+	KornNetwork::redirectPage("/finances");
 }
 
-$categories = '';
+$categories = "";
 $transactionCategories = KYTransactionCategory::getByUser(KYUser::loggedIn());
 if (!is_null($transactionCategories)) {
 	foreach ($transactionCategories as $transactionCategory) {
-		$categorie_note = is_null($transactionCategory->getNote()) ? '' : ' ('.$transactionCategory->getNote().')';
-		$categories .= '<option value="'.$transactionCategory->getID().'" '.KYForm::isSelected($transaction->getTransactionCategory()?->getID() == $transactionCategory->getID()).'>'.$transactionCategory->getName().$categorie_note.'</option>';
+		$note = is_null($transactionCategory->getNote()) ? "" : "({$transactionCategory->getNote()})";
+		$categories .= "
+			<option value='{$transactionCategory->getID()}' 
+				".KYForm::isSelected($transaction->getTransactionCategory()?->getID() == $transactionCategory->getID()).">
+				{$transactionCategory->getName()} $note
+			</option>
+		";
 	}
 }
-$categories .= '<option value="-1" '.KYForm::isSelected(is_null($transaction->getTransactionCategory())).'>อื่น ๆ</option>';
+$categories .= "
+	<option value='-1'
+		".KYForm::isSelected(is_null($transaction->getTransactionCategory())).">
+		อื่น ๆ
+	</option>
+";
 
 ?>
 
 <section>
-	<?= KYHeading::level1('แก้ไขข้อมูลการเงิน', 'fa-pen-to-square',
-		KYLink::internal('/finances', 'ย้อนกลับ', 'fa-rotate-left'),
+	<?= KYHeading::level1("แก้ไขข้อมูลการเงิน", "fa-pen-to-square",
+		KYLink::internal("/finances", "ย้อนกลับ", "fa-rotate-left"),
 	) ?>
 	<form method="post" autocomplete="off">
 		<div class="mb-3">
@@ -134,6 +144,6 @@ $categories .= '<option value="-1" '.KYForm::isSelected(is_null($transaction->ge
 			          autocomplete="off"><?= $transaction->getNote() ?></textarea>
 			<div class="form-text">เราจะไม่เผยแพร่ข้อมูลของคุณกับผู้อื่น</div>
 		</div>
-		<?= KYForm::submitButton('แก้ไขข้อมูลการเงิน', 'fa-pen-to-square') ?>
+		<?= KYForm::submitButton("แก้ไขข้อมูลการเงิน", "fa-pen-to-square") ?>
 	</form>
 </section>

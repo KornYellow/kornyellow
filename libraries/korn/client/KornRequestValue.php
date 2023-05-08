@@ -18,7 +18,7 @@ class KornRequestValue {
 		return is_numeric($this->value) ? floatval($this->value) : 0.0;
 	}
 	public function toString(): string {
-		return is_string($this->value) ? KornString::cleanString($this->value) : '';
+		return is_string($this->value) ? KornString::cleanString($this->value) : "";
 	}
 	public function toStringNullable(): string|null {
 		return KornString::cleanStringNullable($this->value);

@@ -19,25 +19,25 @@ class KornQueryReplace implements KornQueryBuilder {
 	public function build(): string {
 		$fieldsName = KornStatement::getFieldsName($this->table);
 		if (count($this->values) != count($fieldsName)) {
-			return '';
+			return "";
 		}
 
 		$insertValues = array_map(function ($value) {
-			return is_null($value) ? 'null' : '"'.$value.'"';
+			return is_null($value) ? "null" : "\"".$value."\"";
 		}, $this->values);
 
-		$insertStatement = 'INSERT INTO `'.$this->table.'` ';
-		$insertStatement .= '('.implode(', ', $fieldsName).') ';
-		$insertStatement .= 'VALUES ('.implode(', ', $insertValues).')';
+		$insertStatement = "INSERT INTO `$this->table` ";
+		$insertStatement .= "(".implode(", ", $fieldsName).") ";
+		$insertStatement .= "VALUES (".implode(", ", $insertValues).")";
 
 		$updateStatements = array_map(function ($fieldName, $value) {
-			$escapedValue = is_null($value) ? 'null' : '"'.$value.'"';
-			return $fieldName.' = '.$escapedValue;
+			$escapedValue = is_null($value) ? "null" : "\"".$value."\"";
+			return "$fieldName = $escapedValue";
 		}, $fieldsName, $this->values);
 
-		$updateStatement = 'ON DUPLICATE KEY UPDATE ';
-		$updateStatement .= implode(', ', $updateStatements);
+		$updateStatement = "ON DUPLICATE KEY UPDATE ";
+		$updateStatement .= implode(", ", $updateStatements);
 
-		return $insertStatement.' '.$updateStatement;
+		return $insertStatement." ".$updateStatement;
 	}
 }

@@ -7,7 +7,7 @@ class KornFile {
 		return intval(self::getStringFromFile($path));
 	}
 	public static function getStringFromFile(string $path, bool $isArray = false): array|string {
-		$fileRead = fopen(KornNetwork::getDocumentRoot().$path, 'r');
+		$fileRead = fopen(KornNetwork::getDocumentRoot().$path, "r");
 
 		$string = [];
 		while (!feof($fileRead))
@@ -17,7 +17,7 @@ class KornFile {
 		return ($isArray) ? $string : $string[0];
 	}
 	public static function writeToFile(string $path, string $text): void {
-		$fileWrite = fopen(KornNetwork::getDocumentRoot().$path, 'w');
+		$fileWrite = fopen(KornNetwork::getDocumentRoot().$path, "w");
 		fwrite($fileWrite, $text);
 		fclose($fileWrite);
 	}

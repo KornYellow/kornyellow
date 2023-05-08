@@ -16,6 +16,6 @@ class KornQueryRemove implements KornQueryBuilder {
 
 	public function build(): string {
 		// TODO: Implemewnt Build Remove!
-		return '';
+		return "";
 	}
 }

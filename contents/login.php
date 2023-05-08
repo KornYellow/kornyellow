@@ -9,24 +9,24 @@ use libraries\kornyellow\components\KYForm;
 use libraries\kornyellow\components\KYHeading;
 use libraries\kornyellow\instances\methods\KYUser;
 
-KornHeader::constructHeader('เข้าสู่ระบบ');
+KornHeader::constructHeader("เข้าสู่ระบบ");
 
 if (KYUser::isLogin())
-	KornNetwork::redirectPage('/profile');
+	KornNetwork::redirectPage("/profile");
 
-if (KornRequest::post('submit')->isValid()) {
-	$email = KornRequest::post('email')->toString();
-	$password = KornRequest::post('password')->toString();
+if (KornRequest::post("submit")->isValid()) {
+	$email = KornRequest::post("email")->toString();
+	$password = KornRequest::post("password")->toString();
 
 	$isLoginSuccess = KYUser::login($email, $password);
 	if ($isLoginSuccess)
-		KornNetwork::redirectPage('/profile');
+		KornNetwork::redirectPage("/profile");
 }
 
 ?>
 
 <section>
-	<?= KYHeading::level1('เข้าสู่ระบบ', 'fa-right-to-bracket') ?>
+	<?= KYHeading::level1("เข้าสู่ระบบ", "fa-right-to-bracket") ?>
 	<form method="post">
 		<div class="mb-3">
 			<label for="email" class="form-label">ที่อยู่อีเมล</label>
@@ -39,6 +39,6 @@ if (KornRequest::post('submit')->isValid()) {
 			       autocomplete="current-password"/>
 			<div class="form-text">เราจะไม่เผยแพร่ข้อมูลของคุณกับผู้อื่น</div>
 		</div>
-		<?= KYForm::submitButton('เข้าสู่ระบบ', 'fa-right-to-bracket') ?>
+		<?= KYForm::submitButton("เข้าสู่ระบบ", "fa-right-to-bracket") ?>
 	</form>
 </section>

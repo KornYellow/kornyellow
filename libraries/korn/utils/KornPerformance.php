@@ -14,7 +14,7 @@ class KornPerformance {
 	}
 	public static function getMeasuredLoadTime(): string {
 		if (is_null(self::$startLoadTime) || is_null(self::$stopLoadTime))
-			return 'กรุณาเริ่มและหยุดเวลาที่จะวัดก่อน';
+			return "กรุณาเริ่มและหยุดเวลาที่จะวัดก่อน";
 		return number_format(self::$stopLoadTime - self::$startLoadTime, 4);
 	}
 	public static function queryCountIncrease(): void {

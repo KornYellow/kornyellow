@@ -40,7 +40,8 @@ if ($transactionsDisplay == '')
 	<div class="row g-2 mb-5">
 		<div class="col-12 col-lg-4">
 			<div class="bg-slate-700 rounded-3 px-2 px-sm-3 py-2 text-nowrap">
-				<div class="text-slate-400 fs-5"><i class="fa-solid fa-wallet fa-fw me-2 text-yellow"></i>เงินคงเหลือ
+				<div class="text-slate-400 fs-5">
+					<i class="fa-solid fa-wallet fa-fw me-2 text-yellow"></i>เงินคงเหลือ
 				</div>
 				<div class="fs-3">
 					<span>฿</span>
@@ -50,7 +51,8 @@ if ($transactionsDisplay == '')
 		</div>
 		<div class="col-12 col-lg-4">
 			<div class="bg-slate-700 rounded-3 px-2 px-sm-3 py-2 text-nowrap">
-				<div class="text-slate-400 fs-5"><i class="fa-solid fa-turn-down fa-fw me-2 text-yellow"></i>รายรับรวมเดือนนี้
+				<div class="text-slate-400 fs-5">
+					<i class="fa-solid fa-turn-down fa-fw me-2 text-yellow"></i>รายรับรวมเดือนนี้
 				</div>
 				<div class="d-flex justify-content-between">
 					<div class="fs-3">
@@ -65,7 +67,8 @@ if ($transactionsDisplay == '')
 		</div>
 		<div class="col-12 col-lg-4">
 			<div class="bg-slate-700 rounded-3 px-2 px-sm-3 py-2 text-nowrap">
-				<div class="text-slate-400 fs-5"><i class="fa-solid fa-turn-up fa-fw me-2 text-yellow"></i>รายจ่ายรวมเดือนนี้
+				<div class="text-slate-400 fs-5">
+					<i class="fa-solid fa-turn-up fa-fw me-2 text-yellow"></i>รายจ่ายรวมเดือนนี้
 				</div>
 				<div class="d-flex justify-content-between">
 					<div class="fs-3">

@@ -1,20 +1,23 @@
-let forms = document.querySelectorAll('form');
+const tooltipTriggerList = document.querySelectorAll("[data-bs-toggle='tooltip']")
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl, {boundary: document.body}))
+
+let forms = document.querySelectorAll("form");
 forms.forEach((form) => {
-	let submit_button = form.querySelector('button[name="submit"]');
-	form.addEventListener('submit', () => {
-		submit_button.innerHTML = '<i class="fa-solid fa-spinner fa-spin fa-fw me-2"></i>กำลังดำเนินการ';
-		submit_button.classList.add('fake-disable');
+	let submit_button = form.querySelector("button[name='submit']");
+	form.addEventListener("submit", () => {
+		submit_button.innerHTML = "<i class='fa-solid fa-spinner fa-spin fa-fw me-2'></i>กำลังดำเนินการ";
+		submit_button.classList.add("fake-disable");
 	});
 });
 
-let nav_buttons = document.querySelectorAll('.nav-link:not(.dropdown-toggle)');
+let nav_buttons = document.querySelectorAll(".nav-link:not(.dropdown-toggle)");
 nav_buttons.forEach((element) => {
-	if (element.pathname === window.location.pathname.split('/').slice(0, 3).join('/')) {
-		element.classList.add('active');
+	if (element.pathname === window.location.pathname.split("/").slice(0, 3).join("/")) {
+		element.classList.add("active");
 	}
 });
 
-let numberInputs = document.querySelectorAll('.input-baht input');
+let numberInputs = document.querySelectorAll(".input-baht input");
 numberInputs.forEach((numberInput) => {
 	numberInput.addEventListener("input", (event) => {
 		let originalValue = event.target.value;
@@ -22,15 +25,15 @@ numberInputs.forEach((numberInput) => {
 		const originalSelectionEnd = event.target.selectionEnd;
 
 		let newValue = originalValue
-		.replace(/[^\d.]/g, '')
-		.replace(/^\./g, '')
-		.replace(/\.{2,}/g, '.')
-		.replace(/^0+(\d)/, '$1')
-		.replace(/^(\d*\.\d{0,2})\d*$/, '$1')
-		.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			.replace(/[^\d.]/g, "")
+			.replace(/^\./g, "")
+			.replace(/\.{2,}/g, ".")
+			.replace(/^0+(\d)/, "$1")
+			.replace(/^(\d*\.\d{0,2})\d*$/, "$1")
+			.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-		if (newValue === '0') {
-			newValue = '';
+		if (newValue === "0") {
+			newValue = "";
 		}
 
 		const dotsCount = (newValue.match(/\./g) || []).length;

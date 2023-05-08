@@ -35,6 +35,8 @@ $slate-200: #E7E5E4;
 $slate-100: #F5F5F4;
 $slate-50: #FAFAF9;
 
+$main-font: "IBM Plex Sans Thai", sans-serif;
+
 @import "../../bootstrap/scss/variables";
 @import "../../bootstrap/scss/variables-dark";
 
@@ -104,7 +106,7 @@ input::-webkit-datetime-edit-year-field:focus {
 }
 
 body {
-	font-family: "IBM Plex Sans Thai", sans-serif;
+	font-family: $main-font;
 	letter-spacing: 0.01em;
 	line-height: 2.2em;
 }
@@ -163,6 +165,28 @@ body {
 .lh-4 { line-height: 4em !important; }
 .lh-5 { line-height: 5em !important; }
 .lh-6 { line-height: 6em !important; }
+
+/* CHARTS */
+.chart-bar {
+	.chart-container {
+		gap: 2px;
+
+		.bar {
+			background-color: $slate-200;
+			border-radius: 0.5em 0.5em 0 0;
+
+			&.active {
+				background-color: $yellow-500;
+			}
+		}
+	}
+}
+
+/* TOOLTIPS */
+.tooltip {
+	font-family: $main-font;
+	font-weight: bold;
+}
 
 /* IMAGES */
 .img-square {

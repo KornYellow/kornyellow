@@ -8,7 +8,7 @@ use libraries\korn\utils\KornDateTime;
 class KornQuerySelect implements KornQueryBuilder {
 	private string $table;
 
-	private string $where = '';
+	private string $where = "";
 	private string|null $order = null;
 	private bool $isDescending = false;
 	private int|null $limit = null;
@@ -20,45 +20,45 @@ class KornQuerySelect implements KornQueryBuilder {
 
 	public function where(string $column, string|null $value): void {
 		$connection = KornDatabaseConnection::getDatabase();
-		$this->where .= '(';
+		$this->where .= "(";
 		$this->where .= mysqli_real_escape_string($connection, $column);
-		$this->where .= '=';
-		$this->where .= is_null($value) ? 'null' : '"'.mysqli_real_escape_string($connection, $value).'"';
-		$this->where .= ')';
+		$this->where .= "=";
+		$this->where .= is_null($value) ? "null" : "\"".mysqli_real_escape_string($connection, $value)."\"";
+		$this->where .= ")";
 	}
 	public function whereDateInDay(string $column, KornDateTime $day): void {
 		$connection = KornDatabaseConnection::getDatabase();
-		$this->where .= '(';
+		$this->where .= "(";
 		$this->where .= mysqli_real_escape_string($connection, $column);
-		$this->where .= ' BETWEEN ';
-		$this->where .= '\''.$day->toMySQLDate().' 00:00:00\' AND \''.$day->toMySQLDate().' 23:59:59\'';
-		$this->where .= ')';
+		$this->where .= " BETWEEN ";
+		$this->where .= "\"".$day->toMySQLDate()." 00:00:00\" AND \"".$day->toMySQLDate()." 23:59:59\"";
+		$this->where .= ")";
 	}
 	public function whereDateInMonth(string $column, KornDateTime $month): void {
 		$connection = KornDatabaseConnection::getDatabase();
-		$this->where .= '(';
+		$this->where .= "(";
 		$this->where .= mysqli_real_escape_string($connection, $column);
-		$this->where .= ' BETWEEN ';
-		$this->where .= '\''.substr($month->toMySQLDate(), 0, 8).'01 00:00:00\' AND CONCAT(LAST_DAY(\''.substr($month->toMySQLDate(), 0, 8).'01\'), \' 23:59:59\')';
-		$this->where .= ')';
+		$this->where .= " BETWEEN ";
+		$this->where .= "\"".substr($month->toMySQLDate(), 0, 8)."01 00:00:00\" AND CONCAT(LAST_DAY(\"".substr($month->toMySQLDate(), 0, 8)."01\"), \" 23:59:59\")";
+		$this->where .= ")";
 	}
 	public function whereDateInYear(string $column, KornDateTime $year): void {
 		$connection = KornDatabaseConnection::getDatabase();
-		$this->where .= '(';
+		$this->where .= "(";
 		$this->where .= mysqli_real_escape_string($connection, $column);
-		$this->where .= ' BETWEEN ';
-		$this->where .= '\''.substr($year->toMySQLDate(), 0, 5).'01-01 00:00:00\' AND CONCAT(LAST_DAY(\''.substr($year->toMySQLDate(), 0, 5).'12-01\'), \' 23:59:59\')';
-		$this->where .= ')';
+		$this->where .= " BETWEEN ";
+		$this->where .= "\"".substr($year->toMySQLDate(), 0, 5)."01-01 00:00:00\" AND CONCAT(LAST_DAY(\"".substr($year->toMySQLDate(), 0, 5)."12-01\"), \" 23:59:59\")";
+		$this->where .= ")";
 	}
 	public function whereRaw(string $where): void {
 		$this->where = $where;
 	}
 
 	public function whereAnd(): void {
-		$this->where .= ' AND ';
+		$this->where .= " AND ";
 	}
 	public function whereOr(): void {
-		$this->where .= ' OR ';
+		$this->where .= " OR ";
 	}
 
 	public function sortByColumn(string $column): void {
@@ -74,24 +74,24 @@ class KornQuerySelect implements KornQueryBuilder {
 		$this->offset = $offset;
 	}
 	public function build(): string {
-		$build = 'SELECT * FROM `'.$this->table.'` ';
+		$build = "SELECT * FROM `$this->table` ";
 
 		if ($this->where)
-			$build .= 'WHERE '.$this->where.' ';
+			$build .= "WHERE $this->where ";
 
 		if ($this->order)
-			$build .= 'ORDER BY '.$this->table.'.'.$this->order.' ';
+			$build .= "ORDER BY $this->table.$this->order ";
 
 		if ($this->isDescending)
-			$build .= 'DESC ';
+			$build .= "DESC ";
 
 
 		if ($this->limit > 0) {
-			$build .= 'LIMIT ';
+			$build .= "LIMIT ";
 			if ($this->offset == 0)
 				$build .= $this->limit;
 			else if ($this->offset > 0)
-				$build .= $this->offset.', '.$this->limit;
+				$build .= "$this->offset, $this->limit";
 		}
 
 		return $build;

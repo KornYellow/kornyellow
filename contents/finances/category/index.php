@@ -8,31 +8,36 @@ use libraries\kornyellow\components\KYLink;
 use libraries\kornyellow\instances\methods\KYUser;
 use libraries\kornyellow\instances\methods\transaction\KYTransactionCategory;
 
-KornHeader::constructHeader('จัดการชนิดการเงิน');
-
-$tableContent = '';
+KornHeader::constructHeader("จัดการชนิดการเงิน");
 
 $transactionCategories = KYTransactionCategory::getByUser(KYUser::loggedIn());
-if (is_null($transactionCategories))
-	$tableContent = '<tr><td class="text-center" colspan="4">ไม่พบรายการ กรุณาเพิ่มชนิดการเงิน</td></tr>';
-else {
+
+$tableContent = "";
+if (is_null($transactionCategories)) {
+	$tableContent = "
+		<tr>
+			<td class='text-center' colspan='4'>ไม่พบรายการ กรุณาเพิ่มชนิดการเงิน</td>
+		</tr>
+	";
+} else {
 	foreach ($transactionCategories as $transactionCategory) {
-		$tableContent .= '
+		$editButton = KYLink::internal("/finances/category/edit?id=$transactionCategory->getID()", "แก้ไข");
+		$tableContent .= "
 			<tr>
-				<td>'.$transactionCategory->getName().'</td>
-				<td>'.$transactionCategory->getNote().'</td>
-				<td>'.KYLink::internal('/finances/category/edit?id='.$transactionCategory->getID(), 'แก้ไข').'</td>
+				<td>{$transactionCategory->getName()}</td>
+				<td>{$transactionCategory->getNote()}</td>
+				<td>$editButton</td>
 			</tr>
-    ';
+    ";
 	}
 }
 
 ?>
 
 <section>
-	<?= KYHeading::level1('จัดการชนิดการเงิน', 'fa-list',
-		KYLink::internal('/finances/category/create', 'เพิ่มชนิดการเงิน', 'fa-plus'),
-		KYLink::internal('/finances', 'ย้อนกลับ', 'fa-rotate-left'),
+	<?= KYHeading::level1("จัดการชนิดการเงิน", "fa-list",
+		KYLink::internal("/finances/category/create", "เพิ่มชนิดการเงิน", "fa-plus"),
+		KYLink::internal("/finances", "ย้อนกลับ", "fa-rotate-left"),
 	) ?>
 	<table class="table table-striped">
 		<thead>

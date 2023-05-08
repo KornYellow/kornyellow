@@ -8,7 +8,7 @@ use mysqli_stmt;
 
 class KornStatement {
 	public static function getFieldsName(string $table): array {
-		$statement = self::prepare(query: 'SELECT * FROM `'.$table.'`');
+		$statement = self::prepare("SELECT * FROM `$table`");
 
 		$result = $statement->get_result();
 		$fields = $result->fetch_fields();
@@ -24,7 +24,7 @@ class KornStatement {
 		$statement = $connection->prepare($query);
 
 		if (!$statement)
-			KornDebug::printError('ERROR: Failed to prepare query', $connection->error);
+			KornDebug::printError("ERROR: Failed to prepare query", $connection->error);
 
 		$statement->execute();
 
@@ -33,7 +33,7 @@ class KornStatement {
 	public static function getEmptyFieldsName(string $table): array {
 		$emptyFields = [];
 
-		$statement = self::prepare('SELECT * FROM `'.$table.'`');
+		$statement = self::prepare("SELECT * FROM `$table`");
 
 		$result = $statement->get_result();
 		$fields = $result->fetch_fields();

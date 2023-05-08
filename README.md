@@ -1,6 +1,10 @@
-<img alt="Banner image" style="float: right; width: 46%" src="gruvbox.png"/>
-<a href="https://github.com/kornyellow"><img style="width: 49%" alt="Github's stats" src="https://github-readme-stats.vercel.app/api?username=kornyellow&show_icons=true&theme=gruvbox"></a>
-<a href="https://github.com/kornyellow"><img style="width: 49%" alt="Github's stats" src="https://github-readme-streak-stats.herokuapp.com/?user=kornyellow&theme=gruvbox"></a>
+<div style="display: flex;">
+	<div><img alt="Banner image" src="gruvbox.png"/></div>
+	<div>
+		<a href="https://github.com/kornyellow"><img alt="Github's stats" src="https://github-readme-stats.vercel.app/api?username=kornyellow&show_icons=true&theme=gruvbox"></a>
+		<a href="https://github.com/kornyellow"><img alt="Github's stats" src="https://github-readme-streak-stats.herokuapp.com/?user=kornyellow&theme=gruvbox"></a>
+	</div>
+</div>
 
 # Hi!
 

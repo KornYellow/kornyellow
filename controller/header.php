@@ -81,11 +81,11 @@ use libraries\kornyellow\instances\methods\KYUser;
 				<li class="nav-item">
 					<a class="nav-link px-3" href="/about/me" title="รู้จักผมกัน">รู้จักผมกัน</a>
 				</li>
-				<?php if (!KYUser::isLogin()) { ?>
+				<?php if (!KYUser::isLogin()): ?>
 					<li class="nav-item">
 						<a class="nav-link px-3" href="/login" title="เข้าสู่ระบบ">เข้าสู่ระบบ</a>
 					</li>
-				<?php } else { ?>
+				<?php else: ?>
 					<li class="nav-item">
 						<a class="nav-link px-3" href="/finances" title="จัดการรายจ่าย">จัดการรายจ่าย</a>
 					</li>
@@ -109,7 +109,7 @@ use libraries\kornyellow\instances\methods\KYUser;
 							</li>
 						</ul>
 					</li>
-				<?php } ?>
+				<?php endif; ?>
 			</ul>
 		</div>
 	</div>

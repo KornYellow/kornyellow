@@ -15,28 +15,28 @@ use libraries\kornyellow\instances\methods\KYUser;
 use libraries\kornyellow\instances\methods\transaction\KYTransaction;
 use libraries\kornyellow\instances\methods\transaction\KYTransactionCategory;
 
-KornHeader::constructHeader('อัปเดตข้อมูลการเงิน');
+KornHeader::constructHeader("อัปเดตข้อมูลการเงิน");
 
-if (KornRequest::post('submit')->isValid()) {
+if (KornRequest::post("submit")->isValid()) {
 	$dateToday = new KornDateTime();
 
-	$amount = floatval(str_replace(',', '', KornRequest::post('amount')->toString()));
-	$name = KornRequest::post('name')->toString();
-	$type = EnumTransactionType::create(KornRequest::post('type')->toString());
-	$category = KYTransactionCategory::get(KornRequest::post('category')->toInteger());
-	$note = KornRequest::post('note')->toStringNullable();
+	$amount = floatval(str_replace(",", "", KornRequest::post("amount")->toString()));
+	$name = KornRequest::post("name")->toString();
+	$type = EnumTransactionType::create(KornRequest::post("type")->toString());
+	$category = KYTransactionCategory::get(KornRequest::post("category")->toInteger());
+	$note = KornRequest::post("note")->toStringNullable();
 
-	$date = KornRequest::post('date')->toString();
+	$date = KornRequest::post("date")->toString();
 
-	$hour = KornRequest::post('timeHour')->toInteger();
-	$minute = KornRequest::post('timeMinute')->toInteger();
-	$second = KornRequest::post('timeSecond')->toInteger();
-	$time = $hour.':'.$minute.':'.$second;
+	$hour = KornRequest::post("timeHour")->toInteger();
+	$minute = KornRequest::post("timeMinute")->toInteger();
+	$second = KornRequest::post("timeSecond")->toInteger();
+	$time = "$hour:$minute:$second";
 
-	$dateTime = new KornDateTime($dateToday->toMySQLDate().' '.$time);
-	if ($date == 'onedayago')
+	$dateTime = new KornDateTime("{$dateToday->toMySQLDate()} $time");
+	if ($date == "onedayago")
 		$dateTime->modifyDay(-1);
-	if ($date == 'twodayago')
+	if ($date == "twodayago")
 		$dateTime->modifyDay(-2);
 
 	$user = KYUser::loggedIn();
@@ -51,24 +51,29 @@ if (KornRequest::post('submit')->isValid()) {
 
 	KYTransaction::reCalculateBalance($user);
 
-	KornNetwork::redirectPage('/finances');
+	KornNetwork::redirectPage("/finances");
 }
 
-$categories = '<option value="" disabled selected hidden>กดเพื่อเลือกชนิด</option>';
+$categories = "<option value='' disabled selected hidden>กดเพื่อเลือกชนิด</option>";
 $transactionCategories = KYTransactionCategory::getByUser(KYUser::loggedIn());
 if (!is_null($transactionCategories)) {
 	foreach ($transactionCategories as $transactionCategory) {
-		$categorie_note = is_null($transactionCategory->getNote()) ? '' : ' ('.$transactionCategory->getNote().')';
-		$categories .= '<option value="'.$transactionCategory->getID().'">'.$transactionCategory->getName().$categorie_note.'</option>';
+		$category_note = is_null($transactionCategory->getNote()) ? "" : "({$transactionCategory->getNote()})";
+		$categories .= "
+			<option 
+				value='{$transactionCategory->getID()}'>
+				{$transactionCategory->getName()} $category_note
+			</option>
+		";
 	}
 }
-$categories .= '<option value="-1">อื่น ๆ</option>';
+$categories .= "<option value='-1'>อื่น ๆ</option>";
 
 ?>
 
 <section>
-	<?= KYHeading::level1('อัปเดตข้อมูลการเงิน', 'fa-pen-to-square',
-		KYLink::internal('/finances', 'ย้อนกลับ', 'fa-rotate-left'),
+	<?= KYHeading::level1("อัปเดตข้อมูลการเงิน", "fa-pen-to-square",
+		KYLink::internal("/finances", "ย้อนกลับ", "fa-rotate-left"),
 	) ?>
 	<div class="row g-2 mb-5">
 		<div class="col-12">
@@ -83,7 +88,7 @@ $categories .= '<option value="-1">อื่น ๆ</option>';
 			</div>
 		</div>
 	</div>
-	<?= KYHeading::level2('เพิ่มรายการการเงินใหม่') ?>
+	<?= KYHeading::level2("เพิ่มรายการการเงินใหม่") ?>
 	<form method="post" autocomplete="off">
 		<div class="mb-3">
 			<div class="row g-2">
@@ -168,6 +173,6 @@ $categories .= '<option value="-1">อื่น ๆ</option>';
 			          autocomplete="off"></textarea>
 			<div class="form-text">เราจะไม่เผยแพร่ข้อมูลของคุณกับผู้อื่น</div>
 		</div>
-		<?= KYForm::submitButton('อัปเดตข้อมูลการเงิน', 'fa-pen-to-square') ?>
+		<?= KYForm::submitButton("อัปเดตข้อมูลการเงิน", "fa-pen-to-square") ?>
 	</form>
 </section>

@@ -13,11 +13,11 @@ use libraries\kornyellow\instances\classes\transaction\TransactionCategory;
 use libraries\kornyellow\instances\methods\KYUser;
 use libraries\kornyellow\instances\methods\transaction\KYTransactionCategory;
 
-KornHeader::constructHeader('เพิ่มชนิดการเงิน');
+KornHeader::constructHeader("เพิ่มชนิดการเงิน");
 
-if (KornRequest::post('submit')->isValid()) {
-	$name = KornRequest::post('name')->toString();
-	$note = KornRequest::post('note')->toString();
+if (KornRequest::post("submit")->isValid()) {
+	$name = KornRequest::post("name")->toString();
+	$note = KornRequest::post("note")->toString();
 
 	KYTransactionCategory::add(new TransactionCategory(
 		null,
@@ -26,14 +26,14 @@ if (KornRequest::post('submit')->isValid()) {
 		KornString::cleanStringNullable($note)
 	));
 
-	KornNetwork::redirectPage('/finances/category');
+	KornNetwork::redirectPage("/finances/category");
 }
 
 ?>
 
 <section>
-	<?= KYHeading::level1('เพิ่มชนิดการเงิน', 'fa-plus',
-		KYLink::internal('/finances/category', 'ย้อนกลับ', 'fa-rotate-left'),
+	<?= KYHeading::level1("เพิ่มชนิดการเงิน", "fa-plus",
+		KYLink::internal("/finances/category", "ย้อนกลับ", "fa-rotate-left"),
 	) ?>
 	<form method="post">
 		<div class="mb-3">
@@ -47,6 +47,6 @@ if (KornRequest::post('submit')->isValid()) {
 			          autocomplete="off"></textarea>
 			<div class="form-text">เราจะไม่เผยแพร่ข้อมูลของคุณกับผู้อื่น</div>
 		</div>
-		<?= KYForm::submitButton('เพิ่มชนิดการเงิน', 'fa-plus') ?>
+		<?= KYForm::submitButton("เพิ่มชนิดการเงิน", "fa-plus") ?>
 	</form>
 </section>
