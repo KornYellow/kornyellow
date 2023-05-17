@@ -5,7 +5,7 @@ namespace libraries\kornyellow\components;
 use libraries\korn\utils\KornCredential;
 use libraries\kornyellow\instances\classes\YouTubeVideo;
 
-class KYYouTube {
+class KYCYouTube {
 	/**
 	 * @param int $count
 	 *
@@ -31,6 +31,7 @@ class KYYouTube {
 			if ($count == 1)
 				return $result[0];
 		}
+
 		return $result;
 	}
 }

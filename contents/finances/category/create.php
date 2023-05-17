@@ -4,11 +4,12 @@ namespace contents\finances\category;
 
 use libraries\korn\client\KornHeader;
 use libraries\korn\client\KornRequest;
+use libraries\korn\utils\KornIcon;
 use libraries\korn\utils\KornNetwork;
 use libraries\korn\utils\KornString;
-use libraries\kornyellow\components\KYForm;
-use libraries\kornyellow\components\KYHeading;
-use libraries\kornyellow\components\KYLink;
+use libraries\kornyellow\components\general\KYCForm;
+use libraries\kornyellow\components\general\KYCHeading;
+use libraries\kornyellow\components\general\KYCLink;
 use libraries\kornyellow\instances\classes\transaction\TransactionCategory;
 use libraries\kornyellow\instances\methods\KYUser;
 use libraries\kornyellow\instances\methods\transaction\KYTransactionCategory;
@@ -21,7 +22,7 @@ if (KornRequest::post("submit")->isValid()) {
 
 	KYTransactionCategory::add(new TransactionCategory(
 		null,
-		KYUser::loggedIn(),
+		KYUser::getLoggedIn(),
 		KornString::cleanString($name),
 		KornString::cleanStringNullable($note)
 	));
@@ -32,8 +33,8 @@ if (KornRequest::post("submit")->isValid()) {
 ?>
 
 <section>
-	<?= KYHeading::level1("เพิ่มชนิดการเงิน", "fa-plus",
-		KYLink::internal("/finances/category", "ย้อนกลับ", "fa-rotate-left"),
+	<?= KYCHeading::level1("เพิ่มชนิดการเงิน", KornIcon::plus(),
+		KYCLink::internal("/finances/category", "ย้อนกลับ", KornIcon::rotateLeft()),
 	) ?>
 	<form method="post">
 		<div class="mb-3">
@@ -47,6 +48,6 @@ if (KornRequest::post("submit")->isValid()) {
 			          autocomplete="off"></textarea>
 			<div class="form-text">เราจะไม่เผยแพร่ข้อมูลของคุณกับผู้อื่น</div>
 		</div>
-		<?= KYForm::submitButton("เพิ่มชนิดการเงิน", "fa-plus") ?>
+		<?= KYCForm::submitButton("เพิ่มชนิดการเงิน", KornIcon::plus()) ?>
 	</form>
 </section>

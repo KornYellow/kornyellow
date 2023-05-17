@@ -5,9 +5,10 @@ namespace contents\finances\history;
 use libraries\korn\client\KornHeader;
 use libraries\korn\client\KornRequest;
 use libraries\korn\utils\KornDateTime;
-use libraries\kornyellow\components\KYHeading;
-use libraries\kornyellow\components\KYLink;
-use libraries\kornyellow\components\KYTransactionHistory;
+use libraries\korn\utils\KornIcon;
+use libraries\kornyellow\components\general\KYCHeading;
+use libraries\kornyellow\components\general\KYCLink;
+use libraries\kornyellow\components\KYCTransaction;
 use libraries\kornyellow\instances\methods\KYUser;
 use libraries\kornyellow\instances\methods\transaction\KYTransaction;
 
@@ -15,20 +16,28 @@ KornHeader::constructHeader("ประวัติการเงิน");
 
 $transactionsDisplay = "";
 
+// TODO: Refactoring Code
+
 function getByDays(int $dayCount, KornDateTime $startDay = new KornDateTime()): string {
+	$isFirstOne = true;
 	$transactionsDisplay = "";
 	for ($i = 0; $i < $dayCount; $i++) {
-		$transactions = KYTransaction::getByDay($startDay, KYUser::loggedIn());
+		$transactions = KYTransaction::getByDay($startDay, KYUser::getLoggedIn());
 		if (!is_null($transactions)) {
+			$marginTop = "mt-4";
+			if ($isFirstOne)
+				$marginTop = "mt-1";
+			$isFirstOne = false;
 			$transactionsDisplay .= "
-				<div class='col-12 fw-semibold fs-5 text-yellow'>
+				<div class='col-12 fw-semibold fs-6 fs-sm-5 text-slate-400 mb-n2 mb-sm-n1 $marginTop'>
 					{$startDay->toStringShortThai()}
 				</div>
 			";
-			$transactionsDisplay .= KYTransactionHistory::getHistoryBars($transactions);
+			$transactionsDisplay .= KYCTransaction::getHistoryBars($transactions);
 		}
 		$startDay->modifyDay(-1);
 	}
+
 	return $transactionsDisplay;
 }
 
@@ -39,11 +48,11 @@ $transactionsDisplay = getByDays(7);
 
 if ($request->isValid()) {
 	$requestText = $request->toString();
-	$dateToday = new KornDateTime();
+	$dateToday = KornDateTime::now();
 
 	if ($requestText == "lastmonth") {
 		$transactionHeader = "ภายในเดือนที่แล้ว";
-		$dateMonth = new KornDateTime();
+		$dateMonth = KornDateTime::now();
 		$dateMonth = $dateMonth->modifyMonth(-1);
 		$dateToday = $dateToday->modifyMonth(-1);
 
@@ -60,7 +69,7 @@ if ($request->isValid()) {
 
 	} else if ($requestText == "thismonth") {
 		$transactionHeader = "ภายในเดือนนี้";
-		$dateMonth = new KornDateTime();
+		$dateMonth = KornDateTime::now();
 
 		while ($dateMonth->getDate() != 1)
 			$dateMonth->modifyDay(-1);
@@ -81,24 +90,24 @@ if ($request->isValid()) {
 		$transactionsDisplay = getByDays(14);
 	}
 }
-if ($transactionsDisplay == "")
-	$transactionsDisplay = KYTransactionHistory::historyEmpty();
 
 ?>
 
 <section>
-	<?= KYHeading::level1("ประวัติการเงิน", "fa-clock-rotate-left",
-		KYLink::internal("/finances", "ย้อนกลับ", "fa-rotate-left"),
+	<?= KYCHeading::level1("ประวัติการเงิน", KornIcon::clockRotateLeft(),
+		KYCLink::internal("/finances", "ย้อนกลับ", KornIcon::rotateLeft()),
 	) ?>
 	<div class="row g-2 mb-3">
 		<div class="col-12">
 			<div class="bg-slate-700 rounded-3 px-2 px-sm-3 py-2 text-nowrap">
-				<div class="text-slate-400 fs-5"><i class="fa-solid fa-wallet fa-fw me-2 text-yellow"></i>เงินคงเหลือ
+				<div class="text-slate-400 fs-5">
+					<?= KornIcon::wallet()->me1()->more("text-yellow") ?>
+					เงินคงเหลือ
 				</div>
 				<div class="fs-3">
 					<span>฿</span>
 					<span class="fw-semibold">
-						<?= number_format(KYTransaction::reCalculateBalance(KYUser::loggedIn()), 2) ?>
+						<?= number_format(KYTransaction::reCalculateBalance(KYUser::getLoggedIn()), 2) ?>
 					</span>
 				</div>
 			</div>
@@ -126,7 +135,7 @@ if ($transactionsDisplay == "")
 			</div>
 		</form>
 	</div>
-	<?= KYHeading::level2($transactionHeader) ?>
+	<?= KYCHeading::level2($transactionHeader) ?>
 	<div class="row g-2">
 		<?= $transactionsDisplay ?>
 	</div>

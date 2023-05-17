@@ -3,18 +3,19 @@
 namespace contents\profile;
 
 use libraries\korn\client\KornHeader;
-use libraries\kornyellow\components\KYHeading;
-use libraries\kornyellow\components\KYLink;
+use libraries\korn\utils\KornIcon;
+use libraries\kornyellow\components\general\KYCHeading;
+use libraries\kornyellow\components\general\KYCLink;
 use libraries\kornyellow\instances\methods\KYUser;
 
 KornHeader::constructHeader("จัดการบัญชีผู้ใช้");
 
-$user = KYUser::loggedIn();
+$user = KYUser::getLoggedIn();
 
 ?>
 
 <section>
-	<?= KYHeading::level1("จัดการบัญชีผู้ใช้", "fa-cog",
-		KYLink::internal("/logout", "ออกจากระบบ", "fa-right-from-bracket"),
+	<?= KYCHeading::level1("จัดการบัญชีผู้ใช้", KornIcon::cog(),
+		KYCLink::internal("/logout", "ออกจากระบบ", KornIcon::rightFromBracket()),
 	) ?>
 </section>

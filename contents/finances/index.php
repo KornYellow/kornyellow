@@ -4,44 +4,43 @@ namespace contents\finances;
 
 use libraries\korn\client\KornHeader;
 use libraries\korn\utils\KornDateTime;
-use libraries\kornyellow\components\KYHeading;
-use libraries\kornyellow\components\KYLink;
-use libraries\kornyellow\components\KYTransactionHistory;
+use libraries\korn\utils\KornIcon;
+use libraries\kornyellow\components\general\KYCHeading;
+use libraries\kornyellow\components\general\KYCLink;
+use libraries\kornyellow\components\KYCTransaction;
 use libraries\kornyellow\instances\methods\KYUser;
 use libraries\kornyellow\instances\methods\transaction\KYTransaction;
 
-KornHeader::constructHeader('จัดการการเงิน');
+KornHeader::constructHeader("จัดการการเงิน");
 
-$dateToday = new KornDateTime();
-$dateThisMonth = new KornDateTime();
-$dateThisYear = new KornDateTime();
+$dateToday = KornDateTime::now();
+$dateThisMonth = KornDateTime::now();
+$dateThisYear = KornDateTime::now();
 
-$currentBalance = KYTransaction::reCalculateBalance(KYUser::loggedIn());
+$currentBalance = KYTransaction::reCalculateBalance(KYUser::getLoggedIn());
 
-$incomeInMonth = KYTransaction::getIncomeByMonth($dateThisMonth, KYUser::loggedIn());
+$incomeInMonth = KYTransaction::getIncomeByMonth($dateThisMonth, KYUser::getLoggedIn());
 $incomeInMonthAverage = $incomeInMonth / $dateThisMonth->getDate();
 
-$outcomeInMonth = KYTransaction::getOutcomeByMonth($dateThisMonth, KYUser::loggedIn());
+$outcomeInMonth = KYTransaction::getOutcomeByMonth($dateThisMonth, KYUser::getLoggedIn());
 $outcomeInMonthAverage = $outcomeInMonth / $dateThisMonth->getDate();
 
-$transactions = KYTransaction::getByDay($dateToday, KYUser::loggedIn());
-$transactionsDisplay = KYTransactionHistory::getHistoryBars($transactions);
-
-if ($transactionsDisplay == '')
-	$transactionsDisplay = KYTransactionHistory::historyEmpty();
+$transactions = KYTransaction::getByDay($dateToday, KYUser::getLoggedIn());
+$transactionsDisplay = KYCTransaction::getHistoryBars($transactions);
 
 ?>
 
 <section>
-	<?= KYHeading::level1('จัดการการเงิน', 'fa-list',
-		KYLink::internal('/finances/create', 'อัปเดตข้อมูลการเงิน', 'fa-pen-to-square'),
-		KYLink::internal('/finances/category', 'จัดการชนิดการเงิน', 'fa-tag'),
+	<?= KYCHeading::level1("จัดการการเงิน", KornIcon::list(),
+		KYCLink::internal("/finances/create", "อัปเดตข้อมูลการเงิน", KornIcon::penToSquare()),
+		KYCLink::internal("/finances/category", "จัดการชนิดการเงิน", KornIcon::tag()),
 	) ?>
 	<div class="row g-2 mb-5">
 		<div class="col-12 col-lg-4">
 			<div class="bg-slate-700 rounded-3 px-2 px-sm-3 py-2 text-nowrap">
 				<div class="text-slate-400 fs-5">
-					<i class="fa-solid fa-wallet fa-fw me-2 text-yellow"></i>เงินคงเหลือ
+					<?= KornIcon::wallet()->me1()->more("text-yellow") ?>
+					เงินคงเหลือ
 				</div>
 				<div class="fs-3">
 					<span>฿</span>
@@ -52,7 +51,8 @@ if ($transactionsDisplay == '')
 		<div class="col-12 col-lg-4">
 			<div class="bg-slate-700 rounded-3 px-2 px-sm-3 py-2 text-nowrap">
 				<div class="text-slate-400 fs-5">
-					<i class="fa-solid fa-turn-down fa-fw me-2 text-yellow"></i>รายรับรวมเดือนนี้
+					<?= KornIcon::TurnDown()->me1()->more("text-yellow") ?>
+					รายรับรวมเดือนนี้
 				</div>
 				<div class="d-flex justify-content-between">
 					<div class="fs-3">
@@ -68,7 +68,8 @@ if ($transactionsDisplay == '')
 		<div class="col-12 col-lg-4">
 			<div class="bg-slate-700 rounded-3 px-2 px-sm-3 py-2 text-nowrap">
 				<div class="text-slate-400 fs-5">
-					<i class="fa-solid fa-turn-up fa-fw me-2 text-yellow"></i>รายจ่ายรวมเดือนนี้
+					<?= KornIcon::TurnUp()->me1()->more("text-yellow") ?>
+					รายจ่ายรวมเดือนนี้
 				</div>
 				<div class="d-flex justify-content-between">
 					<div class="fs-3">
@@ -82,9 +83,9 @@ if ($transactionsDisplay == '')
 			</div>
 		</div>
 	</div>
-	<?= KYHeading::level1('ประวัติการเงินวันนี้', 'fa-clock-rotate-left',
-		KYLink::internal('/finances/statistic', 'ดูสถิติ', 'fa-chart-column'),
-		KYLink::internal('/finances/history', 'ดูเพิ่มเติม', 'fa-bars'),
+	<?= KYCHeading::level1("ประวัติการเงินวันนี้", KornIcon::clockRotateLeft(),
+		KYCLink::internal("/finances/statistic", "ดูสถิติ", KornIcon::chartColumn()),
+		KYCLink::internal("/finances/history", "ดูเพิ่มเติม", KornIcon::bars()),
 	) ?>
 	<div class="row g-2">
 		<?= $transactionsDisplay ?>

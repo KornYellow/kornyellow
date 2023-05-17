@@ -9,7 +9,6 @@ class User extends KYInstance {
 		protected int|null $id,
 		private string     $email,
 		private string     $password,
-		private float      $amountCached,
 	) {}
 
 	public function getEmail(): string {
@@ -25,14 +24,6 @@ class User extends KYInstance {
 	}
 	public function setPassword(string $password): User {
 		$this->password = $password;
-		return $this;
-	}
-
-	public function getAmountCached(): float {
-		return $this->amountCached;
-	}
-	public function setAmountCached(float $amountCached): User {
-		$this->amountCached = $amountCached;
 		return $this;
 	}
 }

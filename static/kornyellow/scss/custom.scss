@@ -37,15 +37,37 @@ $slate-50: #FAFAF9;
 
 $main-font: "IBM Plex Sans Thai", sans-serif;
 
+$font-size-root: 1rem;
+$font-size-base: $font-size-root;
+$font-size-sm: $font-size-base * 0.825;
+$font-size-lg: $font-size-base * 1.25;
+
+$h1-font-size: $font-size-base * 2.5;
+$h2-font-size: $font-size-base * 2;
+$h3-font-size: $font-size-base * 1.75;
+$h4-font-size: $font-size-base * 1.5;
+$h5-font-size: $font-size-base * 1.25;
+$h6-font-size: $font-size-base;
+
 @import "../../bootstrap/scss/variables";
 @import "../../bootstrap/scss/variables-dark";
 
-/* DEFAULT MAP OVERRIDES */
 @import "../../bootstrap/scss/maps";
 @import "../../bootstrap/scss/mixins";
 @import "../../bootstrap/scss/root";
 
 @import "../../bootstrap/scss/utilities";
+
+/* UTILITIES MAP OVERRIDES */
+$utilities: map-merge(
+		$utilities, (
+		"font-size": map-merge(
+				map-get($utilities, "font-size"),
+				(responsive: true),
+		),
+	)
+);
+
 @import "../../bootstrap/scss/reboot";
 @import "../../bootstrap/scss/type";
 @import "../../bootstrap/scss/images";

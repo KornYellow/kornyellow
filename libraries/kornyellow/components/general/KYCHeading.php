@@ -1,10 +1,13 @@
 <?php
 
-namespace libraries\kornyellow\components;
+namespace libraries\kornyellow\components\general;
 
-class KYHeading {
-	public static function level1(string $text, string $icon = null, string ...$options): string {
-		$icon = is_null($icon) ? "" : "<i class='fa-solid $icon fa-fw me-2 me-lg-3'></i>";
+use libraries\korn\utils\KornIcon;
+
+class KYCHeading {
+	public static function level1(string $text, KornIcon $icon = null, string ...$options): string {
+		if (is_null($icon)) $icon = "";
+		else $icon->me2()->more("me-lg-3");
 
 		if (count($options) == 0) {
 			return "
@@ -31,11 +34,9 @@ class KYHeading {
 			</div>
 		";
 	}
-	public static function level2(string $text, string $icon = null): string {
-		if (!is_null($icon))
-			$icon = "<i class='fa-solid $icon fa-fw me-3'></i>";
-		else
-			$icon = "";
+	public static function level2(string $text, KornIcon $icon = null): string {
+		if (is_null($icon)) $icon = "";
+		else $icon->me3();
 
 		return "
 			<h3 class='my-3 d-flex'>

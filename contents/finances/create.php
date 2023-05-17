@@ -5,10 +5,12 @@ namespace contents\finances;
 use libraries\korn\client\KornHeader;
 use libraries\korn\client\KornRequest;
 use libraries\korn\utils\KornDateTime;
+use libraries\korn\utils\KornIcon;
 use libraries\korn\utils\KornNetwork;
-use libraries\kornyellow\components\KYForm;
-use libraries\kornyellow\components\KYHeading;
-use libraries\kornyellow\components\KYLink;
+use libraries\kornyellow\components\general\KYCForm;
+use libraries\kornyellow\components\general\KYCHeading;
+use libraries\kornyellow\components\general\KYCLink;
+use libraries\kornyellow\components\KYCTransaction;
 use libraries\kornyellow\enums\EnumTransactionType;
 use libraries\kornyellow\instances\classes\transaction\Transaction;
 use libraries\kornyellow\instances\methods\KYUser;
@@ -18,7 +20,7 @@ use libraries\kornyellow\instances\methods\transaction\KYTransactionCategory;
 KornHeader::constructHeader("อัปเดตข้อมูลการเงิน");
 
 if (KornRequest::post("submit")->isValid()) {
-	$dateToday = new KornDateTime();
+	$dateToday = KornDateTime::now();
 
 	$amount = floatval(str_replace(",", "", KornRequest::post("amount")->toString()));
 	$name = KornRequest::post("name")->toString();
@@ -27,7 +29,6 @@ if (KornRequest::post("submit")->isValid()) {
 	$note = KornRequest::post("note")->toStringNullable();
 
 	$date = KornRequest::post("date")->toString();
-
 	$hour = KornRequest::post("timeHour")->toInteger();
 	$minute = KornRequest::post("timeMinute")->toInteger();
 	$second = KornRequest::post("timeSecond")->toInteger();
@@ -39,56 +40,36 @@ if (KornRequest::post("submit")->isValid()) {
 	if ($date == "twodayago")
 		$dateTime->modifyDay(-2);
 
-	$user = KYUser::loggedIn();
-
-	$newTransaction = new Transaction(
-		null, $user, $category, $name,
+	KYTransaction::add(new Transaction(
+		null, KYUser::getLoggedIn(), $category, $name,
 		$note, $type, $amount, $dateTime,
-	);
-
-	$insertedID = KYTransaction::add($newTransaction);
-	$newTransaction->setID($insertedID);
-
-	KYTransaction::reCalculateBalance($user);
+	));
 
 	KornNetwork::redirectPage("/finances");
 }
 
-$categories = "<option value='' disabled selected hidden>กดเพื่อเลือกชนิด</option>";
-$transactionCategories = KYTransactionCategory::getByUser(KYUser::loggedIn());
-if (!is_null($transactionCategories)) {
-	foreach ($transactionCategories as $transactionCategory) {
-		$category_note = is_null($transactionCategory->getNote()) ? "" : "({$transactionCategory->getNote()})";
-		$categories .= "
-			<option 
-				value='{$transactionCategory->getID()}'>
-				{$transactionCategory->getName()} $category_note
-			</option>
-		";
-	}
-}
-$categories .= "<option value='-1'>อื่น ๆ</option>";
-
 ?>
 
 <section>
-	<?= KYHeading::level1("อัปเดตข้อมูลการเงิน", "fa-pen-to-square",
-		KYLink::internal("/finances", "ย้อนกลับ", "fa-rotate-left"),
+	<?= KYCHeading::level1("อัปเดตข้อมูลการเงิน", KornIcon::penToSquare(),
+		KYCLink::internal("/finances", "ย้อนกลับ", KornIcon::rotateLeft()),
 	) ?>
 	<div class="row g-2 mb-5">
 		<div class="col-12">
 			<div class="bg-slate-700 rounded-3 px-2 px-sm-3 py-2 text-nowrap">
-				<div class="text-slate-400 fs-5"><i class="fa-solid fa-wallet fa-fw me-2 text-yellow"></i>เงินคงเหลือ
+				<div class="text-slate-400 fs-5">
+					<?= KornIcon::wallet()->me1()->more("text-yellow") ?>
+					เงินคงเหลือ
 				</div>
 				<div class="fs-3">
 					<span>฿</span>
 					<span
-						class="fw-semibold"><?= number_format(KYTransaction::reCalculateBalance(KYUser::loggedIn()), 2) ?></span>
+						class="fw-semibold"><?= number_format(KYTransaction::reCalculateBalance(KYUser::getLoggedIn()), 2) ?></span>
 				</div>
 			</div>
 		</div>
 	</div>
-	<?= KYHeading::level2("เพิ่มรายการการเงินใหม่") ?>
+	<?= KYCHeading::level2("เพิ่มรายการการเงินใหม่") ?>
 	<form method="post" autocomplete="off">
 		<div class="mb-3">
 			<div class="row g-2">
@@ -96,24 +77,21 @@ $categories .= "<option value='-1'>อื่น ๆ</option>";
 					<input required type="radio" class="btn-check" name="type" value="outcome" id="typeOutcome"
 					       autocomplete="off" checked>
 					<label class="btn btn-outline-yellow d-block fs-4 fw-bold py-1" for="typeOutcome">
-						<i class="fa-solid fa-cash-register fa-fw me-2"></i>รายจ่าย
+						<?= KornIcon::cashRegister()->me1() ?>
+						รายจ่าย
 					</label>
 				</div>
 				<div class="col">
 					<input required type="radio" class="btn-check" name="type" value="income" id="typeIncome"
 					       autocomplete="off">
 					<label class="btn btn-outline-yellow d-block fs-4 fw-bold py-1" for="typeIncome">
-						<i class="fa-solid fa-wallet fa-fw me-2"></i>รายรับ
+						<?= KornIcon::wallet()->me1() ?>
+						รายรับ
 					</label>
 				</div>
 			</div>
 		</div>
 		<div class="row g-2 mb-3">
-			<div class="col">
-				<label for="name" class="form-label">ชื่อรายการ</label>
-				<input type="text" required class="form-control" name="name" id="name"
-				       placeholder="รายการการเงิน" autocomplete="off"/>
-			</div>
 			<div class="col">
 				<label for="amount" class="form-label">เป็นจำนวนเงิน</label>
 				<div class="input-baht">
@@ -121,11 +99,16 @@ $categories .= "<option value='-1'>อื่น ๆ</option>";
 					       autocomplete="off"/>
 				</div>
 			</div>
+			<div class="col">
+				<label for="name" class="form-label">ชื่อรายการ</label>
+				<input type="text" required class="form-control" name="name" id="name"
+				       placeholder="รายการการเงิน" autocomplete="off"/>
+			</div>
 		</div>
 		<div class="mb-3">
 			<label for="category" class="form-label">ชนิดของการเงิน</label>
 			<select required class="form-select" id="category" name="category">
-				<?= $categories ?>
+				<?= KYCTransaction::getCategoryOptions() ?>
 			</select>
 		</div>
 		<div class="mb-3">
@@ -173,6 +156,6 @@ $categories .= "<option value='-1'>อื่น ๆ</option>";
 			          autocomplete="off"></textarea>
 			<div class="form-text">เราจะไม่เผยแพร่ข้อมูลของคุณกับผู้อื่น</div>
 		</div>
-		<?= KYForm::submitButton("อัปเดตข้อมูลการเงิน", "fa-pen-to-square") ?>
+		<?= KYCForm::submitButton("อัปเดตข้อมูลการเงิน", KornIcon::penToSquare()) ?>
 	</form>
 </section>

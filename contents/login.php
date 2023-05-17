@@ -4,9 +4,10 @@ namespace contents\login;
 
 use libraries\korn\client\KornHeader;
 use libraries\korn\client\KornRequest;
+use libraries\korn\utils\KornIcon;
 use libraries\korn\utils\KornNetwork;
-use libraries\kornyellow\components\KYForm;
-use libraries\kornyellow\components\KYHeading;
+use libraries\kornyellow\components\general\KYCForm;
+use libraries\kornyellow\components\general\KYCHeading;
 use libraries\kornyellow\instances\methods\KYUser;
 
 KornHeader::constructHeader("เข้าสู่ระบบ");
@@ -26,7 +27,7 @@ if (KornRequest::post("submit")->isValid()) {
 ?>
 
 <section>
-	<?= KYHeading::level1("เข้าสู่ระบบ", "fa-right-to-bracket") ?>
+	<?= KYCHeading::level1("เข้าสู่ระบบ", KornIcon::rightToBracket()) ?>
 	<form method="post">
 		<div class="mb-3">
 			<label for="email" class="form-label">ที่อยู่อีเมล</label>
@@ -39,6 +40,6 @@ if (KornRequest::post("submit")->isValid()) {
 			       autocomplete="current-password"/>
 			<div class="form-text">เราจะไม่เผยแพร่ข้อมูลของคุณกับผู้อื่น</div>
 		</div>
-		<?= KYForm::submitButton("เข้าสู่ระบบ", "fa-right-to-bracket") ?>
+		<?= KYCForm::submitButton("เข้าสู่ระบบ", KornIcon::rightToBracket()) ?>
 	</form>
 </section>

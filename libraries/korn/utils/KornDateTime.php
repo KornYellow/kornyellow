@@ -21,6 +21,7 @@ class KornDateTime {
 			$this->dateTime = new DateTime();
 		}
 	}
+	public static function now(): KornDateTime { return new KornDateTime(); }
 	public static function createFromDateThai(int $date, int $month, int $year): KornDateTime|null {
 		return self::createFromDate($date, $month, $year - 543);
 	}
@@ -52,30 +53,35 @@ class KornDateTime {
 		$seconds = (int)$timeDifference->format("%s") - $microsecondsDiff;
 		$minutesInSeconds = (int)($timeDifference->format("%i")) * 60;
 		$hoursInSeconds = (int)($timeDifference->format("%h")) * 60 * 60;
+
 		return abs($hoursInSeconds + $minutesInSeconds + $seconds);
 	}
 	public function getDifferenceInHours(KornDateTime $subject): int {
 		$startDate = $this->dateTime;
 		$endDate = $subject->dateTime;
 		$timeDifference = $startDate->diff($endDate);
+
 		return abs(intval($timeDifference->format("%r%a")) * 24 + intval($timeDifference->format("%h")));
 	}
 	public function getDifferenceInDays(KornDateTime $subject): int {
 		$startDate = $this->dateTime;
 		$endDate = $subject->dateTime;
 		$timeDifference = $startDate->diff($endDate);
+
 		return abs($timeDifference->format("%r%a"));
 	}
 	public function getDifferenceInMonths(KornDateTime $subject): int {
 		$startDate = $this->dateTime;
 		$endDate = $subject->dateTime;
 		$timeDifference = $startDate->diff($endDate);
+
 		return abs(intval($timeDifference->format("%r%y")) * 12 + intval($timeDifference->format("%m")));
 	}
 	public function getDifferenceInYears(KornDateTime $subject): int {
 		$startDate = $this->dateTime;
 		$endDate = $subject->dateTime;
 		$timeDifference = $startDate->diff($endDate);
+
 		return abs($timeDifference->format("%r%y"));
 	}
 	public function isSameDateDay(KornDateTime $subject): bool {
@@ -266,18 +272,21 @@ class KornDateTime {
 		if ($day > 0)
 			$day = "+".$day;
 		$this->dateTime->modify("$day day");
+
 		return $this;
 	}
 	public function modifyMonth(int $month): KornDateTime {
 		if ($month > 0)
 			$month = "+".$month;
 		$this->dateTime->modify("first day of $month month");
+
 		return $this;
 	}
 	public function modifyYear(int $year): KornDateTime {
 		if ($year > 0)
 			$year = "+".$year;
 		$this->dateTime->modify("$year year");
+
 		return $this;
 	}
 }

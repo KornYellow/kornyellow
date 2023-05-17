@@ -16,31 +16,7 @@ class KYTransactionCategory extends KYMethod {
 	protected static string $table = "transaction_category";
 	protected static array $getCache = [];
 	protected static array $getByUserCache = [];
-	public static function browse(string $query, int $limit = 15, int $offset = 0): array {
-		// TODO: Implement browse() method.
-		return [];
-	}
-	public static function add(KYInstance|TransactionCategory $instance): int {
-		$replace = new KornQueryReplace(self::$table);
-		$values = [
-			"tc_id" => $instance->getID(),
-			"tc_u_id" => $instance->getUser()->getID(),
-			"tc_name" => $instance->getName(),
-			"tc_amount" => $instance->getNote(),
-		];
-		$replace->values($values);
 
-		$query = new KornQuery($replace);
-		return $query->insertedID();
-	}
-	public static function remove(KYInstance $instance): void {
-		// TODO: Implement remove() method.
-	}
-	public static function getAll(): array|null {
-		$select = new KornQuerySelect(self::$table);
-
-		return self::$getCache = self::processObject(new KornQuery($select), true);
-	}
 	/**
 	 * @param KornQuery $query
 	 * @param bool $isArray
@@ -66,7 +42,30 @@ class KYTransactionCategory extends KYMethod {
 		}
 		if (count($result) == 0)
 			return null;
+
 		return $result;
+	}
+
+	public static function browse(string $query, int $limit = 15, int $offset = 0): array {
+		// TODO: Implement browse() method.
+		return [];
+	}
+	public static function remove(KYInstance $instance): void {
+		// TODO: Implement remove() method.
+	}
+	public static function add(KYInstance|TransactionCategory $instance): int {
+		$replace = new KornQueryReplace(self::$table);
+		$values = [
+			"tc_id" => $instance->getID(),
+			"tc_u_id" => $instance->getUser()->getID(),
+			"tc_name" => $instance->getName(),
+			"tc_amount" => $instance->getNote(),
+		];
+		$replace->values($values);
+
+		$query = new KornQuery($replace);
+
+		return $query->insertedID();
 	}
 	public static function get(int|null $id): TransactionCategory|null {
 		if (array_key_exists($id, self::$getCache))
@@ -76,6 +75,12 @@ class KYTransactionCategory extends KYMethod {
 
 		return self::$getCache[$id] = self::processObject(new KornQuery($select));
 	}
+	public static function getAll(): array|null {
+		$select = new KornQuerySelect(self::$table);
+
+		return self::$getCache = self::processObject(new KornQuery($select), true);
+	}
+
 	public static function getByUser(User $user): array|null {
 		if (array_key_exists($user->getID(), self::$getByUserCache))
 			return self::$getByUserCache[$user->getID()];

@@ -3,15 +3,16 @@
 namespace contents;
 
 use libraries\korn\client\KornHeader;
-use libraries\kornyellow\components\KYHeading;
-use libraries\kornyellow\components\KYLink;
+use libraries\korn\utils\KornIcon;
+use libraries\kornyellow\components\general\KYCHeading;
+use libraries\kornyellow\components\general\KYCLink;
 
 KornHeader::constructHeader("ระบบไม่อนุญาติให้คุณเข้าส่วนนี้ ...");
 
 ?>
 
 <section>
-	<?= KYHeading::level1("ระบบไม่อนุญาติให้คุณเข้าส่วนนี้ ...", "fa-hand") ?>
+	<?= KYCHeading::level1("ระบบไม่อนุญาติให้คุณเข้าส่วนนี้ ...", KornIcon::hand()) ?>
 	<p>ลองหน้าอื่นไหมครับ หรือว่าพิมพ์ลิ้งก์ผิด และหากต้องการกลับไปหน้าหลักก็กดปุ่มด้านล่างได้เลยครับ</p>
-	<?= KYLink::internal("/", "กลับหน้าหลัก", "fa-rotate-left") ?>
+	<?= KYCLink::internal("/", "กลับหน้าหลัก", KornIcon::rotateLeft()) ?>
 </section>

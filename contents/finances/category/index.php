@@ -3,14 +3,15 @@
 namespace contents\finances\category;
 
 use libraries\korn\client\KornHeader;
-use libraries\kornyellow\components\KYHeading;
-use libraries\kornyellow\components\KYLink;
+use libraries\korn\utils\KornIcon;
+use libraries\kornyellow\components\general\KYCHeading;
+use libraries\kornyellow\components\general\KYCLink;
 use libraries\kornyellow\instances\methods\KYUser;
 use libraries\kornyellow\instances\methods\transaction\KYTransactionCategory;
 
 KornHeader::constructHeader("จัดการชนิดการเงิน");
 
-$transactionCategories = KYTransactionCategory::getByUser(KYUser::loggedIn());
+$transactionCategories = KYTransactionCategory::getByUser(KYUser::getLoggedIn());
 
 $tableContent = "";
 if (is_null($transactionCategories)) {
@@ -21,7 +22,7 @@ if (is_null($transactionCategories)) {
 	";
 } else {
 	foreach ($transactionCategories as $transactionCategory) {
-		$editButton = KYLink::internal("/finances/category/edit?id=$transactionCategory->getID()", "แก้ไข");
+		$editButton = KYCLink::internal("/finances/category/edit?id=$transactionCategory->getID()", "แก้ไข");
 		$tableContent .= "
 			<tr>
 				<td>{$transactionCategory->getName()}</td>
@@ -35,9 +36,9 @@ if (is_null($transactionCategories)) {
 ?>
 
 <section>
-	<?= KYHeading::level1("จัดการชนิดการเงิน", "fa-list",
-		KYLink::internal("/finances/category/create", "เพิ่มชนิดการเงิน", "fa-plus"),
-		KYLink::internal("/finances", "ย้อนกลับ", "fa-rotate-left"),
+	<?= KYCHeading::level1("จัดการชนิดการเงิน", KornIcon::list(),
+		KYCLink::internal("/finances/category/create", "เพิ่มชนิดการเงิน", KornIcon::plus()),
+		KYCLink::internal("/finances", "ย้อนกลับ", KornIcon::rotateLeft()),
 	) ?>
 	<table class="table table-striped">
 		<thead>

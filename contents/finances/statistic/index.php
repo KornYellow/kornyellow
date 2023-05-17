@@ -4,8 +4,10 @@ namespace contents\finances\statistic;
 
 use libraries\korn\client\KornHeader;
 use libraries\korn\utils\KornDateTime;
-use libraries\kornyellow\components\KYHeading;
-use libraries\kornyellow\components\KYLink;
+use libraries\korn\utils\KornIcon;
+use libraries\kornyellow\components\general\KYCHeading;
+use libraries\kornyellow\components\general\KYCLink;
+use libraries\kornyellow\components\KYCTransaction;
 use libraries\kornyellow\instances\methods\KYUser;
 use libraries\kornyellow\instances\methods\transaction\KYTransaction;
 
@@ -15,10 +17,10 @@ function getIncomeGraph(): string {
 	$transactionSums = [];
 	$transactionSumLabels = [];
 
-	$dateToday = new KornDateTime();
+	$dateToday = KornDateTime::now();
 
 	for ($i = 0; $i < 7; $i++) {
-		$transactionSums[] = KYTransaction::getIncomeByDay($dateToday, KYUser::loggedIn());
+		$transactionSums[] = KYTransaction::getIncomeByDay($dateToday, KYUser::getLoggedIn());
 
 		$transactionSumLabels[] = "
 			<div class='text-slate-400'>
@@ -54,16 +56,18 @@ function getIncomeGraph(): string {
 			</div>
 		";
 	}
+
 	return $transactionSumDisplay;
 }
+
 function getOutcomeGraph(): string {
 	$transactionSums = [];
 	$transactionSumLabels = [];
 
-	$dateToday = new KornDateTime();
+	$dateToday = KornDateTime::now();
 
 	for ($i = 0; $i < 7; $i++) {
-		$transactionSums[] = KYTransaction::getOutcomeByDay($dateToday, KYUser::loggedIn());
+		$transactionSums[] = KYTransaction::getOutcomeByDay($dateToday, KYUser::getLoggedIn());
 
 		$transactionSumLabels[] = "
 			<div class='text-slate-400'>{$dateToday->getDate()}</div>
@@ -97,53 +101,50 @@ function getOutcomeGraph(): string {
 			</div>
 		";
 	}
+
 	return $transactionSumDisplay;
 }
 
-$dateToday = new KornDateTime();
+$dateToday = KornDateTime::now();
+$dateThisMonth = KornDateTime::now();
+$dateThisYear = KornDateTime::now();
+
+$currentBalance = KYTransaction::reCalculateBalance(KYUser::getLoggedIn());
+
+$incomeInMonth = KYTransaction::getIncomeByMonth($dateThisMonth, KYUser::getLoggedIn());
+$incomeInMonthAverage = $incomeInMonth / $dateThisMonth->getDate();
+
+$outcomeInMonth = KYTransaction::getOutcomeByMonth($dateThisMonth, KYUser::getLoggedIn());
+$outcomeInMonthAverage = $outcomeInMonth / $dateThisMonth->getDate();
+
+$transactions = KYTransaction::getByDay($dateToday, KYUser::getLoggedIn());
+$transactionsDisplay = KYCTransaction::getHistoryBars($transactions);
 
 ?>
 
 <section>
-	<?= KYHeading::level1("สถิติการเงิน", "fa-chart-column",
-		KYLink::internal("/finances", "ย้อนกลับ", "fa-rotate-left"),
+	<?= KYCHeading::level1("สถิติการเงิน", KornIcon::chartColumn(),
+		KYCLink::internal("/finances", "ย้อนกลับ", KornIcon::rotateLeft()),
 	) ?>
-	<div class="row g-1">
+	<div class="row g-3">
 		<div class="col-12 col-lg-6">
-			<div class="bg-slate-700 rounded-3 px-2 px-sm-3 py-2 text-nowrap">
-				<div class="text-slate-400 fs-5 mb-3">
-					ภาพรวมรายจ่าย 7 วัน
-				</div>
-				<div class="chart-bar">
-					<div class="chart-container d-flex align-items-end pb-4" style="height: 250px">
-						<?= getOutcomeGraph() ?>
-					</div>
-				</div>
-				<div class="d-flex justify-content-between mt-3">
-					<div class="text-slate-300"><?= $dateToday->toStringShortThaiFormal() ?></div>
-					<div class="fw-semibold fs-5 text-yellow">
-						- <?= KYTransaction::getOutcomeByDay($dateToday, KYUser::loggedIn()) ?> ฿
-					</div>
+			<?= KYCHeading::level2("ภาพรวมรายจ่าย") ?>
+			<div class="mt-n3 text-slate-400 mb-3">
+				<?= $dateToday->toStringShortThaiFormal() ?>
+			</div>
+			<div class="chart-bar text-nowrap">
+				<div class="chart-container d-flex align-items-end pb-4 gap-2" style="height: 250px">
+					<?= getOutcomeGraph() ?>
 				</div>
 			</div>
 		</div>
 		<div class="col-12 col-lg-6">
-			<div class="bg-slate-700 rounded-3 px-2 px-sm-3 py-2 text-nowrap">
-				<div class="text-slate-400 fs-5 mb-3">
-					ภาพรวมรายรับ 7 วัน
-				</div>
-				<div class="chart-bar">
-					<div class="chart-container d-flex align-items-end pb-4" style="height: 250px">
-						<?= getIncomeGraph() ?>
-					</div>
-				</div>
-				<div class="d-flex justify-content-between mt-3">
-					<div class="text-slate-300"><?= $dateToday->toStringShortThaiFormal() ?></div>
-					<div class="fw-semibold fs-5 text-slate-300">
-						<?= KYTransaction::getIncomeByDay($dateToday, KYUser::loggedIn()) ?> ฿
-					</div>
-				</div>
+			<?= KYCHeading::level2("ยอดรายจ่ายล่าสุด") ?>
+			<div class="mt-n3 text-slate-400 mb-3">
+				วันนี้คุณใช้จ่ายไป
+				฿<?= number_format(KYTransaction::getOutcomeByDay($dateToday, KYUser::getLoggedIn()), 2) ?> บาท
 			</div>
+			<?= $transactionsDisplay ?>
 		</div>
 	</div>
 </section>

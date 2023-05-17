@@ -3,6 +3,7 @@
 namespace templates;
 
 use libraries\korn\client\KornHeader;
+use libraries\korn\utils\KornIcon;
 use libraries\kornyellow\instances\methods\KYUser;
 
 ?>
@@ -71,7 +72,7 @@ use libraries\kornyellow\instances\methods\KYUser;
 		</h1>
 		<button class="navbar-toggler fs-1 border-0" title="Toggle Menu" type="button" data-bs-toggle="collapse"
 		        data-bs-target="#navbar">
-			<i class="fa-solid fa-bars fa-fw p-1"></i>
+			<?= KornIcon::bars() ?>
 		</button>
 		<div class="collapse navbar-collapse" id="navbar">
 			<ul class="navbar-nav fw-semibold ms-auto">
@@ -92,18 +93,18 @@ use libraries\kornyellow\instances\methods\KYUser;
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle text-slate-100 px-3" href="#" role="button"
 						   data-bs-toggle="dropdown" title="บัญชี">
-							<i class="fa-solid fa-user fa-fw"></i>
+							<?= KornIcon::user() ?>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end">
 							<li>
 								<a class="dropdown-item" href="/profile">
-									<i class="fa-solid fa-cog fa-fw me-2"></i>
+									<?= KornIcon::cog()->me2() ?>
 									<span class="fw-semibold">จัดการบัญชีผู้ใช้</span>
 								</a>
 							</li>
 							<li>
 								<a class="dropdown-item" href="/logout">
-									<i class="fa-solid fa-right-from-bracket fa-fw me-2 text-yellow"></i>
+									<?= KornIcon::rightFromBracket()->me2()->more("text-yellow") ?>
 									<span class="fw-semibold text-yellow">ออกจากระบบ</span>
 								</a>
 							</li>

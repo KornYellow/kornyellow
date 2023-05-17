@@ -4,8 +4,9 @@ namespace contents\about;
 
 use libraries\korn\client\KornHeader;
 use libraries\korn\utils\KornDateTime;
-use libraries\kornyellow\components\KYHeading;
-use libraries\kornyellow\components\KYLink;
+use libraries\korn\utils\KornIcon;
+use libraries\kornyellow\components\general\KYCHeading;
+use libraries\kornyellow\components\general\KYCLink;
 
 KornHeader::constructHeader("รู้จักผมกัน");
 
@@ -15,7 +16,7 @@ $ageInYears = $birthDay->getDifferenceInYears(new KornDateTime());
 ?>
 
 <section>
-	<?= KYHeading::level1("ผมเป็นใคร", "fa-question") ?>
+	<?= KYCHeading::level1("ผมเป็นใคร", KornIcon::question()) ?>
 	<div class="bg-slate-700 rounded-3 p-2 p-sm-3 mb-5">
 		<div class="row g-4">
 			<div class="col-12 col-lg-2">
@@ -36,7 +37,7 @@ $ageInYears = $birthDay->getDifferenceInYears(new KornDateTime());
 		</div>
 	</div>
 
-	<?= KYHeading::level2("งานหลักที่รับ", "fa-briefcase") ?>
+	<?= KYCHeading::level2("งานหลักที่รับ", KornIcon::briefcase()) ?>
 	<ul class="mb-5">
 		<li>
 			<span class="text-yellow fw-semibold">PHP Website</span> -
@@ -56,7 +57,7 @@ $ageInYears = $birthDay->getDifferenceInYears(new KornDateTime());
 		</li>
 	</ul>
 
-	<?= KYHeading::level2("งานอื่น ๆ ที่รับ", "fa-circle-info") ?>
+	<?= KYCHeading::level2("งานอื่น ๆ ที่รับ", KornIcon::circleInfo()) ?>
 	<ul class="mb-5">
 		<li>
 			<span class="text-yellow fw-semibold">Speaker</span> -
@@ -68,7 +69,7 @@ $ageInYears = $birthDay->getDifferenceInYears(new KornDateTime());
 		</li>
 	</ul>
 
-	<?= KYHeading::level2('ประสบการณ์ และการศึกษา', 'fa-graduation-cap') ?>
+	<?= KYCHeading::level2('ประสบการณ์ และการศึกษา', KornIcon::graduationCap()) ?>
 	<ul class="mb-5">
 		<li>
 			<span class="text-yellow fw-semibold">University</span> -
@@ -89,22 +90,22 @@ $ageInYears = $birthDay->getDifferenceInYears(new KornDateTime());
 		</li>
 	</ul>
 
-	<?= KYHeading::level2('ช่องทางการติดต่อ', 'fa-phone') ?>
+	<?= KYCHeading::level2('ช่องทางการติดต่อ', KornIcon::phone()) ?>
 	<ul>
 		<li>
-			<?= KYLink::external('https://github.com/kornyellow', 'GitHub') ?> -
+			<?= KYCLink::external('https://github.com/kornyellow', 'GitHub') ?> -
 			พื้นที่เก็บโปรเจกต์เกือบทั้งหมดในชีวิตผม รวมถึง Open source ที่ผมกล่าวถึง
 		</li>
 		<li>
-			<?= KYLink::external('https://youtube.com/kornyellow', 'YouTube') ?> - พื้นที่เก็บโปรเจกต์ในรูปแบบวีดีโอ
+			<?= KYCLink::external('https://youtube.com/kornyellow', 'YouTube') ?> - พื้นที่เก็บโปรเจกต์ในรูปแบบวีดีโอ
 			หรือจะเป็นอะไรก็ได้ที่ผมอยากทำ
 		</li>
 		<li>
-			<?= KYLink::external('https://facebook.com/kornyellow', 'Facebook') ?> -
+			<?= KYCLink::external('https://facebook.com/kornyellow', 'Facebook') ?> -
 			เผื่อคุณอยากรู้ชีวิตของผม
 		</li>
 		<li>
-			<?= KYLink::external('https://instagram.com/korn.yellow', 'Instagram') ?> -
+			<?= KYCLink::external('https://instagram.com/korn.yellow', 'Instagram') ?> -
 			เผื่อคุณอยากรู้ชีวิตของผม
 		</li>
 		<li>

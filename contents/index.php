@@ -4,11 +4,11 @@ namespace contents;
 
 use libraries\korn\client\KornHeader;
 use libraries\korn\utils\KornDateTime;
-use libraries\kornyellow\components\KYHeading;
+use libraries\kornyellow\components\general\KYCHeading;
 
 KornHeader::constructHeader();
 
-$dateNow = new KornDateTime();
+$dateNow = KornDateTime::now();
 $recentBlogs = str_repeat("
 	<article class='col-12 col-lg-6'>
 		<div class='border border-1'>
@@ -32,7 +32,7 @@ $recentBlogs = str_repeat("
 ?>
 
 <section>
-	<?= KYHeading::level1("บทความล่าสุด") ?>
+	<?= KYCHeading::level1("บทความล่าสุด") ?>
 	<div class="row gy-3 gx-3 mb-5">
 		<?= $recentBlogs ?>
 	</div>
