@@ -1,11 +1,11 @@
 <?php
 
-namespace contents\login;
+namespace kornyellow\contents\login;
 
-use libraries\korn\client\KornHeader;
-use libraries\korn\client\KornRequest;
-use libraries\korn\utils\KornIcon;
-use libraries\korn\utils\KornNetwork;
+use KornyellowLib\Client\KornHeader;
+use KornyellowLib\Client\KornRequest;
+use KornyellowLib\Utils\KornIcon;
+use KornyellowLib\Utils\KornNetwork;
 use libraries\kornyellow\components\general\KYCForm;
 use libraries\kornyellow\components\general\KYCHeading;
 use libraries\kornyellow\instances\methods\KYUser;

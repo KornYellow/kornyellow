@@ -1,9 +1,9 @@
 <?php
 
-namespace contents\blogs;
+namespace kornyellow\contents\blogs;
 
-use libraries\korn\client\KornHeader;
-use libraries\korn\client\KornRequest;
+use KornyellowLib\Client\KornHeader;
+use KornyellowLib\Client\KornRequest;
 use libraries\kornyellow\components\general\KYCHeading;
 use libraries\kornyellow\components\general\KYCLink;
 

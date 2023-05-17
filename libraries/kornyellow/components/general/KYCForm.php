@@ -2,7 +2,7 @@
 
 namespace libraries\kornyellow\components\general;
 
-use libraries\korn\utils\KornIcon;
+use KornyellowLib\Utils\KornIcon;
 
 class KYCForm {
 	public static function isChecked(bool $isCheck): string {

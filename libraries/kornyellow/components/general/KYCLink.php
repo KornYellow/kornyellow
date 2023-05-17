@@ -2,7 +2,7 @@
 
 namespace libraries\kornyellow\components\general;
 
-use libraries\korn\utils\KornIcon;
+use KornyellowLib\Utils\KornIcon;
 
 class KYCLink {
 	public static function external(string $href, string $text): string {

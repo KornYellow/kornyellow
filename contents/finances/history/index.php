@@ -1,11 +1,11 @@
 <?php
 
-namespace contents\finances\history;
+namespace kornyellow\contents\finances\history;
 
-use libraries\korn\client\KornHeader;
-use libraries\korn\client\KornRequest;
-use libraries\korn\utils\KornDateTime;
-use libraries\korn\utils\KornIcon;
+use KornyellowLib\Client\KornHeader;
+use KornyellowLib\Client\KornRequest;
+use KornyellowLib\Utils\KornDateTime;
+use KornyellowLib\Utils\KornIcon;
 use libraries\kornyellow\components\general\KYCHeading;
 use libraries\kornyellow\components\general\KYCLink;
 use libraries\kornyellow\components\KYCTransaction;

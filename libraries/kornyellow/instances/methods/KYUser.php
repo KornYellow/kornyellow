@@ -2,12 +2,12 @@
 
 namespace libraries\kornyellow\instances\methods;
 
-use libraries\korn\client\KornSession;
-use libraries\korn\server\query\builder\KornQueryReplace;
-use libraries\korn\server\query\builder\KornQuerySelect;
-use libraries\korn\server\query\KornQuery;
-use libraries\korn\server\query\KornStatement;
-use libraries\korn\utils\KornNetwork;
+use KornyellowLib\Client\KornSession;
+use KornyellowLib\Server\Query\Builder\KornQueryReplace;
+use KornyellowLib\Server\Query\Builder\KornQuerySelect;
+use KornyellowLib\Server\Query\KornQuery;
+use KornyellowLib\Server\Query\KornStatement;
+use KornyellowLib\Utils\KornNetwork;
 use libraries\kornyellow\instances\classes\User;
 use libraries\kornyellow\instances\KYInstance;
 use libraries\kornyellow\instances\KYMethod;

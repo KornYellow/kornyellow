@@ -1,10 +1,10 @@
 <?php
 
-namespace templates;
+namespace kornyellow\templates;
 
-use libraries\korn\utils\KornDateTime;
-use libraries\korn\utils\KornNetwork;
-use libraries\korn\utils\KornPerformance;
+use KornyellowLib\Utils\KornDateTime;
+use KornyellowLib\Utils\KornNetwork;
+use KornyellowLib\Utils\KornPerformance;
 
 $measureTime = "
 	<div class='d-flex flex-column flex-lg-row gap-0 gap-lg-2'>

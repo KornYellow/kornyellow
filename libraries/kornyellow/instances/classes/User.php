@@ -16,6 +16,7 @@ class User extends KYInstance {
 	}
 	public function setEmail(string $email): User {
 		$this->email = $email;
+
 		return $this;
 	}
 
@@ -24,6 +25,7 @@ class User extends KYInstance {
 	}
 	public function setPassword(string $password): User {
 		$this->password = $password;
+
 		return $this;
 	}
 }

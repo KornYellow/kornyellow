@@ -1,9 +1,9 @@
 <?php
 
-namespace templates\errors;
+namespace kornyellow\templates\errors;
 
-use libraries\korn\client\KornHeader;
-use libraries\korn\utils\KornIcon;
+use KornyellowLib\Client\KornHeader;
+use KornyellowLib\Utils\KornIcon;
 use libraries\kornyellow\components\general\KYCHeading;
 use libraries\kornyellow\components\general\KYCLink;
 

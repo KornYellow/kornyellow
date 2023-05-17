@@ -1,12 +1,12 @@
 <?php
 
-namespace contents\finances\category;
+namespace kornyellow\contents\finances\category;
 
-use libraries\korn\client\KornHeader;
-use libraries\korn\client\KornRequest;
-use libraries\korn\utils\KornIcon;
-use libraries\korn\utils\KornNetwork;
-use libraries\korn\utils\KornString;
+use KornyellowLib\Client\KornHeader;
+use KornyellowLib\Client\KornRequest;
+use KornyellowLib\Utils\KornIcon;
+use KornyellowLib\Utils\KornNetwork;
+use KornyellowLib\Utils\KornString;
 use libraries\kornyellow\components\general\KYCForm;
 use libraries\kornyellow\components\general\KYCHeading;
 use libraries\kornyellow\components\general\KYCLink;

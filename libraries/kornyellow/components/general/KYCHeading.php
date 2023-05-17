@@ -2,7 +2,7 @@
 
 namespace libraries\kornyellow\components\general;
 
-use libraries\korn\utils\KornIcon;
+use KornyellowLib\Utils\KornIcon;
 
 class KYCHeading {
 	public static function level1(string $text, KornIcon $icon = null, string ...$options): string {

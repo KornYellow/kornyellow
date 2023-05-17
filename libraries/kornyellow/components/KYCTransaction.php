@@ -2,7 +2,7 @@
 
 namespace libraries\kornyellow\components;
 
-use libraries\korn\utils\KornIcon;
+use KornyellowLib\Utils\KornIcon;
 use libraries\kornyellow\components\general\KYCForm;
 use libraries\kornyellow\enums\EnumTransactionType;
 use libraries\kornyellow\instances\classes\transaction\Transaction;

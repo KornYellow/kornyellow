@@ -2,7 +2,7 @@
 
 namespace libraries\kornyellow\instances\classes\transaction;
 
-use libraries\korn\utils\KornDateTime;
+use KornyellowLib\Utils\KornDateTime;
 use libraries\kornyellow\enums\EnumTransactionType;
 use libraries\kornyellow\instances\classes\User;
 use libraries\kornyellow\instances\KYInstance;
@@ -24,6 +24,7 @@ class Transaction extends KYInstance {
 	}
 	public function setUser(User $user): Transaction {
 		$this->user = $user;
+
 		return $this;
 	}
 
@@ -32,6 +33,7 @@ class Transaction extends KYInstance {
 	}
 	public function setTransactionCategory(TransactionCategory|null $transactionCategory): Transaction {
 		$this->transactionCategory = $transactionCategory;
+
 		return $this;
 	}
 
@@ -40,6 +42,7 @@ class Transaction extends KYInstance {
 	}
 	public function setName(string $name): Transaction {
 		$this->name = $name;
+
 		return $this;
 	}
 
@@ -48,6 +51,7 @@ class Transaction extends KYInstance {
 	}
 	public function setNote(string|null $note): Transaction {
 		$this->note = $note;
+
 		return $this;
 	}
 
@@ -56,6 +60,7 @@ class Transaction extends KYInstance {
 	}
 	public function setTransactionType(EnumTransactionType $transactionType): Transaction {
 		$this->transactionType = $transactionType;
+
 		return $this;
 	}
 
@@ -64,6 +69,7 @@ class Transaction extends KYInstance {
 	}
 	public function setDateTime(KornDateTime $dateTime): Transaction {
 		$this->dateTime = $dateTime;
+
 		return $this;
 	}
 
@@ -72,6 +78,7 @@ class Transaction extends KYInstance {
 	}
 	public function setAmount(float $amount): Transaction {
 		$this->amount = $amount;
+
 		return $this;
 	}
 }

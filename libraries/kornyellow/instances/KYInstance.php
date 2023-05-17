@@ -10,6 +10,7 @@ abstract class KYInstance {
 	}
 	public function setID(int|null $id): KYInstance {
 		$this->id = $id;
+
 		return $this;
 	}
 }

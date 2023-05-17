@@ -1,9 +1,9 @@
 <?php
 
-namespace templates;
+namespace kornyellow\templates;
 
-use libraries\korn\client\KornHeader;
-use libraries\korn\utils\KornIcon;
+use KornyellowLib\Client\KornHeader;
+use KornyellowLib\Utils\KornIcon;
 use libraries\kornyellow\instances\methods\KYUser;
 
 ?>

@@ -18,6 +18,7 @@ class TransactionCategory extends KYInstance {
 	}
 	public function setUser(User $user): TransactionCategory {
 		$this->user = $user;
+
 		return $this;
 	}
 
@@ -26,6 +27,7 @@ class TransactionCategory extends KYInstance {
 	}
 	public function setName(string $name): TransactionCategory {
 		$this->name = $name;
+
 		return $this;
 	}
 
@@ -34,6 +36,7 @@ class TransactionCategory extends KYInstance {
 	}
 	public function setNote(string|null $note): TransactionCategory {
 		$this->note = $note;
+
 		return $this;
 	}
 }

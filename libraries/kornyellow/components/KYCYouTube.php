@@ -2,7 +2,7 @@
 
 namespace libraries\kornyellow\components;
 
-use libraries\korn\utils\KornCredential;
+use KornyellowLib\Utils\KornCredential;
 use libraries\kornyellow\instances\classes\YouTubeVideo;
 
 class KYCYouTube {

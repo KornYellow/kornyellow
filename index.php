@@ -2,12 +2,17 @@
 
 declare(strict_types=1);
 
-use libraries\korn\client\KornHeader;
-use libraries\korn\KornConfig;
-use libraries\korn\server\connection\KornDatabaseConnection;
-use libraries\korn\server\connection\KornFTPConnection;
-use libraries\korn\utils\KornNetwork;
-use libraries\korn\utils\KornPerformance;
+namespace kornyellow;
+
+// Libraries for autoload classes
+include("vendor/autoload.php");
+
+use KornyellowLib\Client\KornHeader;
+use KornyellowLib\KornConfig;
+use KornyellowLib\Server\Connection\KornDatabaseConnection;
+use KornyellowLib\Server\Connection\KornFTPConnection;
+use KornyellowLib\Utils\KornNetwork;
+use KornyellowLib\Utils\KornPerformance;
 
 // Make errors visible
 ini_set("display_errors", 1);
@@ -16,9 +21,6 @@ error_reporting(E_PARSE | E_ERROR);
 
 // Set timezone
 date_default_timezone_set("Asia/Bangkok");
-
-// Libraries for autoload classes
-include("vendor/autoload.php");
 
 // Config header
 KornConfig::$websiteName = "KORNYELLOW";

@@ -2,7 +2,7 @@
 
 namespace libraries\kornyellow\enums;
 
-use libraries\korn\utils\enum\KornEnum;
+use KornyellowLib\Utils\Enum\KornEnum;
 
 class EnumTransactionType extends KornEnum {
 	public static function create($value): EnumTransactionType|null {

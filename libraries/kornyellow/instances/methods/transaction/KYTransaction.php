@@ -2,11 +2,11 @@
 
 namespace libraries\kornyellow\instances\methods\transaction;
 
-use libraries\korn\server\query\builder\KornQueryReplace;
-use libraries\korn\server\query\builder\KornQuerySelect;
-use libraries\korn\server\query\KornQuery;
-use libraries\korn\server\query\KornStatement;
-use libraries\korn\utils\KornDateTime;
+use KornyellowLib\Server\Query\Builder\KornQueryReplace;
+use KornyellowLib\Server\Query\Builder\KornQuerySelect;
+use KornyellowLib\Server\Query\KornQuery;
+use KornyellowLib\Server\Query\KornStatement;
+use KornyellowLib\Utils\KornDateTime;
 use libraries\kornyellow\enums\EnumTransactionType;
 use libraries\kornyellow\instances\classes\transaction\Transaction;
 use libraries\kornyellow\instances\classes\User;

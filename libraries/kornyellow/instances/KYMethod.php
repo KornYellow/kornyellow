@@ -2,7 +2,7 @@
 
 namespace libraries\kornyellow\instances;
 
-use libraries\korn\server\query\KornQuery;
+use KornyellowLib\Server\Query\KornQuery;
 
 abstract class KYMethod {
 	protected static string $table;

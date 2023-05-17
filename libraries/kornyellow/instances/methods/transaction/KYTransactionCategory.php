@@ -2,10 +2,10 @@
 
 namespace libraries\kornyellow\instances\methods\transaction;
 
-use libraries\korn\server\query\builder\KornQueryReplace;
-use libraries\korn\server\query\builder\KornQuerySelect;
-use libraries\korn\server\query\KornQuery;
-use libraries\korn\server\query\KornStatement;
+use KornyellowLib\Server\Query\Builder\KornQueryReplace;
+use KornyellowLib\Server\Query\Builder\KornQuerySelect;
+use KornyellowLib\Server\Query\KornQuery;
+use KornyellowLib\Server\Query\KornStatement;
 use libraries\kornyellow\instances\classes\transaction\TransactionCategory;
 use libraries\kornyellow\instances\classes\User;
 use libraries\kornyellow\instances\KYInstance;

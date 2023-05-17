@@ -1,9 +1,9 @@
 <?php
 
-namespace contents\blogs;
+namespace kornyellow\contents\blogs;
 
-use libraries\korn\client\KornHeader;
-use libraries\korn\utils\KornDateTime;
+use KornyellowLib\Client\KornHeader;
+use KornyellowLib\Utils\KornDateTime;
 use libraries\kornyellow\components\general\KYCHeading;
 
 KornHeader::constructHeader("บทความทั้งหมด");
