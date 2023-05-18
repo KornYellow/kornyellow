@@ -40,6 +40,8 @@ class KYTransactionCategory extends KYMethod {
 			if (!$isArray)
 				return $result[$firstIndex];
 		}
+		if (!$isArray && count($result) == 0)
+			return null;
 
 		return $result;
 	}
