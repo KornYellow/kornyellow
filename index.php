@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace kornyellow;
 
 // Libraries for autoload classes
-include("vendor/autoload.php");
+require_once __DIR__."/vendor/autoload.php";
 
 use KornyellowLib\Client\KornHeader;
 use KornyellowLib\KornConfig;

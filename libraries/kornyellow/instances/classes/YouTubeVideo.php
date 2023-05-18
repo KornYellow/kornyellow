@@ -2,12 +2,12 @@
 
 namespace libraries\kornyellow\instances\classes;
 
-readonly class YouTubeVideo {
+class YouTubeVideo {
 	public function __construct(
-		private string $id,
-		private string $title,
-		private string $description,
-		private string $thumbnail,
+		private readonly string $id,
+		private readonly string $title,
+		private readonly string $description,
+		private readonly string $thumbnail,
 	) {}
 
 	public function getID(): string {

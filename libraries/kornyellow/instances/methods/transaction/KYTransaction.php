@@ -2,6 +2,7 @@
 
 namespace libraries\kornyellow\instances\methods\transaction;
 
+use KornyellowLib\Server\Query\Builder\KornQueryDelete;
 use KornyellowLib\Server\Query\Builder\KornQueryReplace;
 use KornyellowLib\Server\Query\Builder\KornQuerySelect;
 use KornyellowLib\Server\Query\KornQuery;
@@ -47,8 +48,6 @@ class KYTransaction extends KYMethod {
 			if (!$isArray)
 				return $result[$firstIndex];
 		}
-		if (count($result) == 0)
-			return null;
 
 		return $result;
 	}
@@ -58,7 +57,10 @@ class KYTransaction extends KYMethod {
 		return [];
 	}
 	public static function remove(KYInstance $instance): void {
-		// TODO: Implement remove() method.
+		$remove = new KornQueryDelete(self::$table);
+		$remove->where("t_id", $instance->getID());
+
+		KornQuery::execute($remove);
 	}
 	public static function add(KYInstance|Transaction $instance): int {
 		$replace = new KornQueryReplace(self::$table);
