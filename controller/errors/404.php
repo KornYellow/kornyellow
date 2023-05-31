@@ -1,6 +1,6 @@
 <?php
 
-namespace kornyellow\templates\errors;
+namespace kornyellow\controller\errors;
 
 use KornyellowLib\Client\KornHeader;
 use KornyellowLib\Utils\KornIcon;

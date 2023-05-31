@@ -91,6 +91,7 @@ $utilities: map-merge(
 		--bs-nav-link-hover-color: #{$slate-200};
 		--bs-navbar-active-color: #{$yellow-500};
 	}
+
 	.dropdown-menu {
 		--bs-dropdown-bg: #{$slate-800};
 		--bs-dropdown-border-color: #{$slate-600};
@@ -136,6 +137,7 @@ body {
 * {
 	-ms-overflow-style: none;
 	scrollbar-width: none;
+
 	*::-webkit-scrollbar {
 		display: none;
 	}
@@ -232,13 +234,17 @@ body {
 	border-color: $slate-600 !important;
 	color: $slate-100 !important;
 }
+
 .form-control:focus, .form-check-input:focus:not(:checked), .form-select:focus {
 	border-color: $slate-500 !important;
 	box-shadow: 0 0 0 3px $slate-700 !important;
 	color: $slate-100 !important;
 }
+
 .form-select option:hover { background-color: $yellow-500 !important; }
+
 .form-label { color: $slate-400 !important; }
+
 .form-text { color: $slate-500 !important; }
 
 .input-baht {
@@ -317,6 +323,7 @@ a:focus, button:focus, a:focus-visible, button:focus-visible {
 	border-color: $yellow-600 !important;
 	color: $yellow-100 !important;
 }
+
 .btn-check:checked + .btn-outline-yellow {
 	background-color: $yellow-500 !important;
 	border-color: $yellow-500 !important;
@@ -337,4 +344,9 @@ a:focus, button:focus, a:focus-visible, button:focus-visible {
 .blog-link:hover h3 {
 	border-bottom: 2px solid $yellow-500 !important;
 	color: $yellow-500 !important;
+}
+
+/* DEBUG */
+.debug {
+	font-family: monospace !important;
 }

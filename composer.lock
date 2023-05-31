@@ -1,58 +1,56 @@
 {
-	"_readme": [
-		"This file locks the dependencies of your project to a known state",
-		"Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
-		"This file is @generated automatically"
-	],
-	"content-hash": "d9d06ebf6ba2486b5f663619f6e55169",
-	"packages": [
-		{
-			"name": "kornyellow/kornyellow-lib",
-			"version": "dev-main",
-			"dist": {
-				"type": "path",
-				"url": "C:/Users/kornyellow/Repos/kornyellow-lib",
-				"reference": "7e9c0afc1c5a237d56b29d228997f94e601a31ca"
-			},
-			"require": {
-				"ext-ftp": "*",
-				"ext-mysqli": "*",
-				"php": "^8.1"
-			},
-			"type": "library",
-			"autoload": {
-				"psr-4": {
-					"KornyellowLib\\": "src"
-				}
-			},
-			"license": [
-				"MIT"
-			],
-			"authors": [
-				{
-					"name": "kornyellow",
-					"email": "kornkubzaza@gmail.com"
-				}
-			],
-			"description": "Little KornYellow framework for easier making money",
-			"transport-options": {
-				"relative": false
-			}
-		}
-	],
-	"packages-dev": [],
-	"aliases": [],
-	"minimum-stability": "stable",
-	"stability-flags": {
-		"kornyellow/kornyellow-lib": 20
-	},
-	"prefer-stable": false,
-	"prefer-lowest": false,
-	"platform": {
-		"php": "^8.1",
-		"ext-mysqli": "*",
-		"ext-ftp": "*"
-	},
-	"platform-dev": [],
-	"plugin-api-version": "2.3.0"
+  "_readme": [
+    "This file locks the dependencies of your project to a known state",
+    "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+    "This file is @generated automatically"
+  ],
+  "content-hash": "34ddb9c29abb24f7ca5f513b3703df70",
+  "packages": [
+    {
+      "name": "kornyellow/kornyellow-lib",
+      "version": "dev-main",
+      "dist": {
+        "type": "path",
+        "url": "/home/kornyellow/Repos/kornyellow-lib",
+        "reference": "1785e0cb2d10ff4a8f93545b7262a153399a460f"
+      },
+      "require": {
+        "ext-ftp": "*",
+        "ext-mysqli": "*",
+        "php": "^8.1"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "KornyellowLib\\": "src"
+        }
+      },
+      "license": [
+        "MIT"
+      ],
+      "authors": [
+        {
+          "name": "kornyellow",
+          "email": "kornkubzaza@gmail.com"
+        }
+      ],
+      "description": "Little KornYellow framework for easier making money",
+      "transport-options": {
+        "relative": false
+      }
+    }
+  ],
+  "packages-dev": [],
+  "aliases": [],
+  "minimum-stability": "stable",
+  "stability-flags": {
+    "kornyellow/kornyellow-lib": 20
+  },
+  "prefer-stable": false,
+  "prefer-lowest": false,
+  "platform": {
+    "php": "^8.1"
+  },
+  "platform-dev": [],
+  "plugin-api-version": "2.3.0"
 }

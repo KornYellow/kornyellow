@@ -1,29 +1,27 @@
 {
-	"name": "kornyellow/kornyellow",
-	"description": "Portfolio website",
-	"type": "project",
-	"license": "proprietary",
-	"autoload": {
-		"psr-4": {
-			"libraries\\": "libraries"
-		}
-	},
-	"authors": [
-		{
-			"name": "kornyellow",
-			"email": "kornkubzaza@gmail.com"
-		}
-	],
-	"require": {
-		"kornyellow/kornyellow-lib": "dev-main",
-		"php": "^8.1",
-		"ext-mysqli": "*",
-		"ext-ftp": "*"
-	},
-	"repositories": [
-		{
-			"type": "path",
-			"url": "C:/Users/kornyellow/Repos/kornyellow-lib"
-		}
-	]
+  "name": "kornyellow/kornyellow",
+  "description": "Portfolio website",
+  "type": "project",
+  "license": "proprietary",
+  "autoload": {
+    "psr-4": {
+      "libraries\\": "libraries"
+    }
+  },
+  "authors": [
+    {
+      "name": "kornyellow",
+      "email": "kornkubzaza@gmail.com"
+    }
+  ],
+  "require": {
+    "kornyellow/kornyellow-lib": "dev-main",
+    "php": "^8.1"
+  },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "/home/kornyellow/Repos/kornyellow-lib"
+    }
+  ]
 }

@@ -20410,13 +20410,18 @@ a:focus, button:focus, a:focus-visible, button:focus-visible {
 }
 
 .blog-link h3, .blog-link .h3 {
-  border-bottom: 2px solid #FAFAF9 !important;
-  padding-bottom: 0.1em !important;
+    border-bottom: 2px solid #FAFAF9 !important;
+    padding-bottom: 0.1em !important;
 }
 
 .blog-link:hover h3, .blog-link:hover .h3 {
-  border-bottom: 2px solid #F59E0B !important;
-  color: #F59E0B !important;
+    border-bottom: 2px solid #F59E0B !important;
+    color: #F59E0B !important;
+}
+
+/* DEBUG */
+.debug {
+    font-family: monospace !important;
 }
 
 /*# sourceMappingURL=custom.css.map */
