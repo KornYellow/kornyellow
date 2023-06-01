@@ -3,6 +3,7 @@
 namespace kornyellow\contents\finances\category;
 
 use KornyellowLib\Client\KornHeader;
+use KornyellowLib\Client\KornURL;
 use KornyellowLib\Utils\KornIcon;
 use libraries\kornyellow\components\general\KYCHeading;
 use libraries\kornyellow\components\general\KYCLink;
@@ -22,7 +23,8 @@ if (is_null($transactionCategories)) {
 	";
 } else {
 	foreach ($transactionCategories as $transactionCategory) {
-		$editButton = KYCLink::internal("/finances/category/edit?id=$transactionCategory->getID()", "แก้ไข");
+		$editLink = KornURL::create("/finances/category/edit")->add("id", $transactionCategory->getID());
+		$editButton = KYCLink::internal($editLink, "แก้ไข");
 		$tableContent .= "
 			<tr>
 				<td>{$transactionCategory->getName()}</td>

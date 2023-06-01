@@ -17,5 +17,4 @@ $blog_status = KornRequest::get("blog_status")->toString();
 	<?= KYCHeading::level1("จัดการบทความ", null,
 		KYCLink::internal("/blogs/create", "เขียนบทความใหม่"),
 	) ?>
-
 </section>

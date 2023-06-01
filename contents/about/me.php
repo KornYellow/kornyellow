@@ -97,8 +97,8 @@ $ageInYears = $birthDay->getDifferenceInYears(new KornDateTime());
 			พื้นที่เก็บโปรเจกต์เกือบทั้งหมดในชีวิตผม รวมถึง Open source ที่ผมกล่าวถึง
 		</li>
 		<li>
-			<?= KYCLink::external('https://youtube.com/kornyellow', 'YouTube') ?> - พื้นที่เก็บโปรเจกต์ในรูปแบบวีดีโอ
-			หรือจะเป็นอะไรก็ได้ที่ผมอยากทำ
+			<?= KYCLink::external('https://youtube.com/kornyellow', 'YouTube') ?> -
+			พื้นที่เก็บโปรเจกต์ในรูปแบบวีดีโอ หรือจะเป็นอะไรก็ได้ที่ผมอยากทำ
 		</li>
 		<li>
 			<?= KYCLink::external('https://facebook.com/kornyellow', 'Facebook') ?> -

@@ -69,27 +69,27 @@ $transactionsDisplay = KYCTransaction::getHistoryBars($transactions);
 	<?= KYCHeading::level1("สถิติการเงิน", KornIcon::chartColumn(),
 		KYCLink::internal("/finances", "ย้อนกลับ", KornIcon::rotateLeft()),
 	) ?>
-    <div class="row g-3">
-        <div class="col-12 col-lg-6">
+	<div class="row g-3">
+		<div class="col-12 col-lg-6">
 			<?= KYCHeading::level2("ภาพรวมรายจ่าย") ?>
-            <div class="mt-n3 text-slate-400 mb-3">
+			<div class="mt-n3 text-slate-400 mb-3">
 				<?= $dateToday->toStringShortThaiFormal() ?>
-            </div>
-            <div class="chart-bar text-nowrap">
-                <div class="chart-container d-flex align-items-end pb-4 gap-2" style="height: 250px">
+			</div>
+			<div class="chart-bar text-nowrap">
+				<div class="chart-container d-flex align-items-end pb-4 gap-2" style="height: 250px">
 					<?= getOutcomeGraph() ?>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-6">
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-lg-6">
 			<?= KYCHeading::level2("ยอดรายจ่ายล่าสุด") ?>
-            <div class="mt-n3 text-slate-400 mb-3">
-                วันนี้คุณใช้จ่ายไป
-                ฿<?= number_format(KYTransaction::getOutcomeByDay($dateToday, KYUser::getLoggedIn()), 2) ?> บาท
-            </div>
-            <div class="row g-2">
+			<div class="mt-n3 text-slate-400 mb-3">
+				วันนี้คุณใช้จ่ายไป
+				฿<?= number_format(KYTransaction::getOutcomeByDay($dateToday, KYUser::getLoggedIn()), 2) ?> บาท
+			</div>
+			<div class="row g-2">
 				<?= $transactionsDisplay ?>
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
 </section>
