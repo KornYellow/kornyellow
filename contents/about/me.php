@@ -11,7 +11,7 @@ use libraries\kornyellow\components\general\KYCLink;
 KornHeader::constructHeader("รู้จักผมกัน");
 
 $birthDay = KornDateTime::createFromDateThai(26, 8, 2545);
-$ageInYears = $birthDay->getDifferenceInYears(new KornDateTime());
+$ageInYears = $birthDay->getDifferenceInYears(KornDateTime::now());
 
 ?>
 

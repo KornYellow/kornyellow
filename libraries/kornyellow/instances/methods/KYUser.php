@@ -14,6 +14,7 @@ use libraries\kornyellow\instances\KYMethod;
 
 class KYUser extends KYMethod {
 	protected static string $table = "user";
+
 	protected static array $getCache = [];
 	protected static array $getByEmailCache = [];
 
@@ -33,6 +34,7 @@ class KYUser extends KYMethod {
 		while ($bind = $query->nextBind($bind)) {
 			if (is_null($firstIndex))
 				$firstIndex = $bind["u_id"];
+
 			$result[$bind["u_id"]] = new User(
 				$bind["u_id"],
 				$bind["u_email"],
@@ -51,7 +53,9 @@ class KYUser extends KYMethod {
 		// TODO: Implement browse() method.
 		return [];
 	}
-
+	public static function remove(KYInstance|User $instance): void {
+		// TODO: Implement remove() method.
+	}
 	public static function add(KYInstance|User $instance): int {
 		$replace = new KornQueryReplace(self::$table);
 		$values = [
@@ -65,10 +69,6 @@ class KYUser extends KYMethod {
 
 		return $query->insertedID();
 	}
-	public static function remove(KYInstance|User $instance): void {
-		// TODO: Implement remove() method.
-	}
-
 	public static function get(int|null $id): User|null {
 		if (array_key_exists($id, self::$getCache))
 			return self::$getCache[$id];

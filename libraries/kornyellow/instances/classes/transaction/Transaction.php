@@ -13,7 +13,6 @@ class Transaction extends KYInstance {
 		private User                     $user,
 		private TransactionCategory|null $transactionCategory,
 		private string                   $name,
-		private string|null              $note,
 		private EnumTransactionType      $transactionType,
 		private float                    $amount,
 		private KornDateTime             $dateTime,
@@ -42,15 +41,6 @@ class Transaction extends KYInstance {
 	}
 	public function setName(string $name): Transaction {
 		$this->name = $name;
-
-		return $this;
-	}
-
-	public function getNote(): string|null {
-		return $this->note;
-	}
-	public function setNote(string|null $note): Transaction {
-		$this->note = $note;
 
 		return $this;
 	}

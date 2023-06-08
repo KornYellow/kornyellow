@@ -12,7 +12,7 @@
       "dist": {
         "type": "path",
         "url": "/home/kornyellow/Repos/kornyellow-lib",
-        "reference": "1785e0cb2d10ff4a8f93545b7262a153399a460f"
+        "reference": "62eb1112e1987680d4a22c760028bd9d948c4c77"
       },
       "require": {
         "ext-ftp": "*",

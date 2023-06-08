@@ -32,33 +32,20 @@ class KYCTransaction {
 			$transactionsDisplay .= KYCTransaction::historyBar(
 				$transaction->getID(),
 				$transaction->getName(),
-				$transaction->getNote(),
 				$amountColor,
 				$amount,
 				$transaction->getDateTime()->toStringTime(),
 				$category.$categoryNote,
 			);
 		}
-		if (empty($transactionsDisplay))
-			return self::historyEmpty();
 
 		return $transactionsDisplay;
 	}
 
-	private static function historyBar(int $id, string $name, string|null $note, string $amountColor, string $amount, string $date, string $category): string {
-		if ($note != null)
-			$note = "
-				<div class='col-12 col-sm-12 text-slate-300 mt-n1 fw-light 
-					justify-content-end align-items-center d-flex flex-sm-row-reverse'>
-					$note".KornIcon::commentDots()->mx3()."
-				</div>
-			";
-		else
-			$note = "";
-
+	private static function historyBar(int $id, string $name, string $amountColor, string $amount, string $date, string $category): string {
 		return "
 			<div class='col-12'>
-				<div class='bg-slate-700 rounded-3 px-2 px-sm-3 py-1 py-sm-2'>
+				<div class='bg-slate-700 rounded-3 px-2 px-sm-3 py-1'>
 					<div class='d-flex justify-content-between align-items-center gap-1 gap-sm-2'>
 						<i class='fa-solid fa-wallet text-yellow ms-1 me-2 me-lg-3 fa-fw fs-5 fs-sm-2'></i>
 						<div class='flex-grow-1 overflow-hidden'>
@@ -72,9 +59,9 @@ class KYCTransaction {
 							</div>
 						</div>
 						<div>
-							<div class='dropdown h-100 text-end'>
+							<div class='dropdown text-end'>
 								<button class='btn btn-grey-icon dropdown-toggle px-sm-2 px-0' title='จัดการเพิ่มเติม' type='button' data-bs-toggle='dropdown'>
-									".(KornIcon::ellipsisVertical()->xl()->more("px-sm-2 p-0 py-4"))."
+									".(KornIcon::ellipsisVertical()->xl()->more("px-sm-2 p-0 py-3"))."
 								</button>
 								<ul class='dropdown-menu dropdown-menu-end'>
 									<li>
@@ -93,23 +80,10 @@ class KYCTransaction {
 							</div>
 						</div>
 					</div>
-					<span>$note</span>
 				</div>
-        	</div>
+     	</div>
 		";
 	}
-
-	private static function historyEmpty(): string {
-		return "
-			<div class='col-12'>
-				<div class='bg-slate-700 rounded-3 px-2 px-sm-3 py-1 py-sm-2 text-slate-300 text-nowrap fw-semibold text-center'>
-					".KornIcon::exclamation()->me2()."
-					ยังไม่พบข้อมูลที่ท่านต้องการ
-				</div>
-			</div>
-		";
-	}
-
 	public static function getCategoryOptions(Transaction $transaction = null): string {
 		$categories = "<option value='' disabled selected hidden>กดเพื่อเลือกชนิด</option>";
 		$transactionCategories = KYTransactionCategory::getByUser(KYUser::getLoggedIn());
@@ -132,5 +106,15 @@ class KYCTransaction {
 		";
 
 		return $categories;
+	}
+	public static function historyEmpty(): string {
+		return "
+			<div class='col-12'>
+				<div class='bg-slate-700 rounded-3 px-2 px-sm-3 py-1 py-sm-2 text-slate-300 text-nowrap fw-semibold text-center'>
+					".KornIcon::exclamation()->me2()."
+					ยังไม่พบข้อมูลที่ท่านต้องการ
+				</div>
+			</div>
+		";
 	}
 }

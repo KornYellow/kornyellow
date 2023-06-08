@@ -28,6 +28,9 @@ $outcomeInMonthAverage = $outcomeInMonth / $dateThisMonth->getDate();
 $transactions = KYTransaction::getByDay($dateToday, KYUser::getLoggedIn());
 $transactionsDisplay = KYCTransaction::getHistoryBars($transactions);
 
+if (empty($transactionsDisplay))
+	$transactionsDisplay = KYCTransaction::historyEmpty();
+
 ?>
 
 <section>

@@ -27,21 +27,40 @@ class KYCHeading {
 					<div class='flex-fill'>
 						<h2 class='me-4 d-flex'>$icon$text</h2>
 					</div>
-					<div class='mt-1 mt-md-0'>
-						<div class='row g-1'>$secondColumn</div>
+					<div class='mt-n1 mt-md-0'>
+						<div class='row g-0 g-md-2'>$secondColumn</div>
 					</div>
 				</div>	
 			</div>
 		";
 	}
-	public static function level2(string $text, KornIcon $icon = null): string {
+	public static function level2(string $text, KornIcon $icon = null, string ...$options): string {
 		if (is_null($icon)) $icon = "";
 		else $icon->me3();
 
+		if (count($options) == 0) {
+			return "
+				<h3 class='mb-3 d-flex'>
+					$icon$text
+				</h3>
+			";
+		}
+
+		$secondColumn = "";
+		foreach ($options as $option)
+			$secondColumn .= "<div class='col-12 col-md-auto'>$option</div>";
+
 		return "
-			<h3 class='my-3 d-flex'>
-				$icon$text
-			</h3>
+			<div class='mb-2'>
+				<div class='d-flex'>
+					<div class='flex-fill'>
+						<h3 class='me-4 d-flex'>$icon$text</h3>
+					</div>
+					<div class='mt-1 mt-md-0'>
+						<div class='row g-1'>$secondColumn</div>
+					</div>
+				</div>	
+			</div>
 		";
 	}
 	public static function level3(string $text): string {

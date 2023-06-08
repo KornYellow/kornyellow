@@ -12,12 +12,14 @@ class EnumTransactionType extends KornEnum {
 			default => null
 		};
 	}
+
 	public static function INCOME(): self {
 		return new self("income", "รายรับ");
 	}
 	public static function OUTCOME(): self {
 		return new self("outcome", "รายจ่าย");
 	}
+
 	public function getID() {
 		return $this->values[0];
 	}

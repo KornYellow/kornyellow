@@ -17,6 +17,7 @@ use libraries\kornyellow\instances\methods\KYUser;
 
 class KYTransaction extends KYMethod {
 	protected static string $table = "transaction";
+
 	protected static array $getCache = [];
 
 	/**
@@ -39,7 +40,6 @@ class KYTransaction extends KYMethod {
 				KYUser::get($bind["t_u_id"]),
 				KYTransactionCategory::get($bind["t_tc_id"]),
 				$bind["t_name"],
-				$bind["t_note"],
 				EnumTransactionType::create($bind["t_type"]),
 				$bind["t_amount"],
 				new KornDateTime($bind["t_datetime"]),
@@ -71,7 +71,6 @@ class KYTransaction extends KYMethod {
 			"t_u_id" => $instance->getUser()->getID(),
 			"t_tc_id" => $instance->getTransactionCategory()?->getID(),
 			"t_name" => $instance->getName(),
-			"t_note" => $instance->getNote(),
 			"t_type" => $instance->getTransactionType()->getID(),
 			"t_amount" => $instance->getAmount(),
 			"t_datetime" => $instance->getDateTime()->toMySQLDateTime(),
@@ -95,19 +94,36 @@ class KYTransaction extends KYMethod {
 
 		return self::$getCache = self::processObject(new KornQuery($select), true);
 	}
-	public static function reCalculateBalance(User $user): float {
-		$transactions = self::getAll();
-		if (is_null($transactions))
-			return 0;
-		$balance = 0;
-		foreach ($transactions as $transaction) {
-			if ($transaction->getTransactionType()->compareTo(EnumTransactionType::INCOME()))
-				$balance += $transaction->getAmount();
-			else
-				$balance -= $transaction->getAmount();
-		}
 
-		return $balance;
+	public static function getByDay(KornDateTime $day, User $user): array|null {
+		$select = new KornQuerySelect(self::$table);
+		$select->whereDateInDay("t_datetime", $day);
+		$select->whereAnd();
+		$select->where("t_u_id", $user->getID());
+		$select->sortByColumn("t_datetime");
+		$select->sortDescending();
+
+		return self::processObject(new KornQuery($select), true);
+	}
+	public static function getByMonth(KornDateTime $month, User $user): array|null {
+		$select = new KornQuerySelect(self::$table);
+		$select->whereDateInMonth("t_datetime", $month);
+		$select->whereAnd();
+		$select->where("t_u_id", $user->getID());
+		$select->sortByColumn("t_datetime");
+		$select->sortDescending();
+
+		return self::processObject(new KornQuery($select), true);
+	}
+	public static function getByYear(KornDateTime $year, User $user): array|null {
+		$select = new KornQuerySelect(self::$table);
+		$select->whereDateInYear("t_datetime", $year);
+		$select->whereAnd();
+		$select->where("t_u_id", $user->getID());
+		$select->sortByColumn("t_datetime");
+		$select->sortDescending();
+
+		return self::processObject(new KornQuery($select), true);
 	}
 
 	public static function getIncomeByDay(KornDateTime $day, User $user): float {
@@ -184,35 +200,28 @@ class KYTransaction extends KYMethod {
 		return $balance;
 	}
 
-	public static function getByDay(KornDateTime $day, User $user): array|null {
-		$select = new KornQuerySelect(self::$table);
-		$select->whereDateInDay("t_datetime", $day);
-		$select->whereAnd();
-		$select->where("t_u_id", $user->getID());
-		$select->sortByColumn("t_datetime");
-		$select->sortDescending();
+	public static function getAllNameJSON(): string {
+		$transactions = self::getAll();
 
-		return self::processObject(new KornQuery($select), true);
-	}
-	public static function getByMonth(KornDateTime $month, User $user): array|null {
-		$select = new KornQuerySelect(self::$table);
-		$select->whereDateInMonth("t_datetime", $month);
-		$select->whereAnd();
-		$select->where("t_u_id", $user->getID());
-		$select->sortByColumn("t_datetime");
-		$select->sortDescending();
+		$transactionNames = [];
+		foreach ($transactions as $transaction)
+			$transactionNames[] = $transaction->getName();
 
-		return self::processObject(new KornQuery($select), true);
-	}
-	public static function getByYear(KornDateTime $year, User $user): array|null {
-		$select = new KornQuerySelect(self::$table);
-		$select->whereDateInYear("t_datetime", $year);
-		$select->whereAnd();
-		$select->where("t_u_id", $user->getID());
-		$select->sortByColumn("t_datetime");
-		$select->sortDescending();
-
-		return self::processObject(new KornQuery($select), true);
+		return json_encode($transactionNames);
 	}
 
+	public static function reCalculateBalance(User $user): float {
+		$transactions = self::getAll();
+		if (is_null($transactions))
+			return 0;
+		$balance = 0;
+		foreach ($transactions as $transaction) {
+			if ($transaction->getTransactionType()->compareTo(EnumTransactionType::INCOME()))
+				$balance += $transaction->getAmount();
+			else
+				$balance -= $transaction->getAmount();
+		}
+
+		return $balance;
+	}
 }

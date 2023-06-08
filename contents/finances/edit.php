@@ -10,12 +10,14 @@ use KornyellowLib\Utils\KornNetwork;
 use libraries\kornyellow\components\general\KYCForm;
 use libraries\kornyellow\components\general\KYCHeading;
 use libraries\kornyellow\components\general\KYCLink;
+use libraries\kornyellow\components\general\KYCScript;
 use libraries\kornyellow\components\KYCTransaction;
 use libraries\kornyellow\enums\EnumTransactionType;
 use libraries\kornyellow\instances\methods\transaction\KYTransaction;
 use libraries\kornyellow\instances\methods\transaction\KYTransactionCategory;
 
 KornHeader::constructHeader("แก้ไขชนิดการเงิน");
+KYCScript::enableTransaction();
 
 if (KornRequest::get("id")->isNull())
 	KornNetwork::redirectPage("/finances");
@@ -27,7 +29,6 @@ if (KornRequest::post("submit")->isValid()) {
 	$name = KornRequest::post("name")->toString();
 	$type = EnumTransactionType::create(KornRequest::post("type")->toString());
 	$category = KYTransactionCategory::get(KornRequest::post("category")->toInteger());
-	$note = KornRequest::post("note")->toStringNullable();
 
 	$date = KornRequest::post("date")->toString();
 	$hour = KornRequest::post("timeHour")->toInteger();
@@ -40,7 +41,6 @@ if (KornRequest::post("submit")->isValid()) {
 	$transaction->setName($name);
 	$transaction->setTransactionType($type);
 	$transaction->setTransactionCategory($category);
-	$transaction->setNote($note);
 	$transaction->setDateTime($dateTime);
 
 	KYTransaction::add($transaction);
@@ -87,7 +87,9 @@ if (KornRequest::post("submit")->isValid()) {
 			<div class="col">
 				<label for="name" class="form-label">ชื่อรายการ</label>
 				<input type="text" required class="form-control" name="name" id="name"
-				       placeholder="รายการการเงิน" autocomplete="off" value="<?= $transaction->getName() ?>"/>
+				       placeholder="รายการการเงิน" autocomplete="off" value="<?= $transaction->getName() ?>"
+				       list="transaction_name_result"/>
+				<datalist id="transaction_name_result"></datalist>
 			</div>
 		</div>
 		<div class="mb-3">
@@ -121,11 +123,6 @@ if (KornRequest::post("submit")->isValid()) {
 					       value="<?= $transaction->getDateTime()->getSecond() ?>">
 				</label>
 			</div>
-		</div>
-		<div class="mb-3">
-			<label for="note" class="form-label">เตือนความจำ</label>
-			<textarea class="form-control" name="note" id="note" placeholder="บันทึกเพิ่มเติม..."
-			          autocomplete="off"><?= $transaction->getNote() ?></textarea>
 			<div class="form-text">เราจะไม่เผยแพร่ข้อมูลของคุณกับผู้อื่น</div>
 		</div>
 		<?= KYCForm::submitButton("แก้ไขข้อมูลการเงิน", KornIcon::penToSquare()) ?>

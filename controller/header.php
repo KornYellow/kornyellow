@@ -13,6 +13,7 @@ use libraries\kornyellow\instances\methods\KYUser;
 
 <head>
 	<meta charset="utf-8">
+	<!--
 	<meta http-equiv="content-security-policy" content="
 		default-src 'self' www.youtube.com;
 		script-src 'self' 'unsafe-inline' cdn.jsdelivr.net kit.fontawesome.com 'sha256-jo/2B4g3Be+aX/ZBPjuNtTHv4Ydazkz5qAG2FMdKlo8=' 'sha256-tuaE6LEzkgJRBa3LtOtRMO9F+16ZAMFpJ4aBiOnVrAs=';
@@ -21,6 +22,7 @@ use libraries\kornyellow\instances\methods\KYUser;
 		font-src 'self' ka-f.fontawesome.com fonts.gstatic.com;
 		img-src 'self' i.ytimg.com data: image/svg+xml;
 	">
+	-->
 
 	<title><?= KornHeader::getTitle() ?></title>
 
@@ -42,6 +44,9 @@ use libraries\kornyellow\instances\methods\KYUser;
 	<link href="/static/fontawesome/css/brands.css" rel="stylesheet">
 	<link href="/static/fontawesome/css/solid.css" rel="stylesheet">
 
+	<!-- Javascript -->
+	<script src="/static/kornyellow/js/script.js" defer></script>
+
 	<!-- CSS -->
 	<link rel="stylesheet" href="/static/kornyellow/scss/custom.css">
 
@@ -50,9 +55,6 @@ use libraries\kornyellow\instances\methods\KYUser;
 	<link rel="icon" sizes="any" href="/static/kornyellow/favicons/favicon.ico">
 	<link rel="shortcut icon" href="/static/kornyellow/favicons/favicon.ico">
 	<link rel="manifest" href="/static/kornyellow/favicons/site.webmanifest">
-
-	<!-- Javascript -->
-	<script src="/static/kornyellow/js/script.js" type="text/javascript" defer></script>
 
 	<!-- Canonical -->
 	<link rel="canonical" href="https://kornyellow.com/<?= KornHeader::getCanonical() ?>">

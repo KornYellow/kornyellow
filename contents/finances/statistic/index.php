@@ -37,6 +37,8 @@ function getOutcomeGraph(): string {
 
 	$power = 0.5;
 	$yAxisMax = pow($transactionSumMax, $power);
+	if ($yAxisMax == 0)
+		$yAxisMax = 1;
 
 	$transactionSumDisplay = "";
 	foreach ($transactionSums as $index => $transactionSum) {
@@ -63,6 +65,9 @@ $dateToday = KornDateTime::now();
 $transactions = KYTransaction::getByDay($dateToday, KYUser::getLoggedIn());
 $transactionsDisplay = KYCTransaction::getHistoryBars($transactions);
 
+if (empty($transactionsDisplay))
+	$transactionsDisplay = KYCTransaction::historyEmpty();
+
 ?>
 
 <section>
@@ -71,9 +76,11 @@ $transactionsDisplay = KYCTransaction::getHistoryBars($transactions);
 	) ?>
 	<div class="row g-3">
 		<div class="col-12 col-lg-6">
-			<?= KYCHeading::level2("ภาพรวมรายจ่าย") ?>
+			<?= KYCHeading::level2("ภาพรวมรายจ่าย", null,
+				KYCLink::internal("/finances/statistic/all", "ดูเพิ่มเติม", KornIcon::bars()),
+			) ?>
 			<div class="mt-n3 text-slate-400 mb-3">
-				<?= $dateToday->toStringShortThaiFormal() ?>
+				<div><?= $dateToday->toStringShortThaiFormal() ?></div>
 			</div>
 			<div class="chart-bar text-nowrap">
 				<div class="chart-container d-flex align-items-end pb-4 gap-2" style="height: 250px">

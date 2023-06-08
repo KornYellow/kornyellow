@@ -23,20 +23,27 @@ function getByDays(int $dayCount, KornDateTime $startDay = new KornDateTime()): 
 	$transactionsDisplay = "";
 	for ($i = 0; $i < $dayCount; $i++) {
 		$transactions = KYTransaction::getByDay($startDay, KYUser::getLoggedIn());
+		$startDay->modifyDay(-1);
+
 		if (!is_null($transactions)) {
+			$historyBars = KYCTransaction::getHistoryBars($transactions);
+			if (empty($historyBars))
+				continue;
+
 			$marginTop = "mt-4";
 			if ($isFirstOne)
 				$marginTop = "mt-1";
 			$isFirstOne = false;
+
 			$transactionsDisplay .= "
 				<div class='col-12 fw-semibold fs-6 fs-sm-5 text-slate-400 mb-n2 mb-sm-n1 $marginTop'>
 					{$startDay->toStringShortThai()}
 				</div>
-			";
-			$transactionsDisplay .= KYCTransaction::getHistoryBars($transactions);
+			".$historyBars;
 		}
-		$startDay->modifyDay(-1);
 	}
+	if (empty($transactionsDisplay))
+		$transactionsDisplay .= KYCTransaction::historyEmpty();
 
 	return $transactionsDisplay;
 }
