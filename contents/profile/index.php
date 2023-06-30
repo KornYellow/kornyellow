@@ -15,7 +15,7 @@ $user = KYUser::getLoggedIn();
 ?>
 
 <section>
-	<?= KYCHeading::level1("จัดการบัญชีผู้ใช้", KornIcon::cog(),
+	<?= KYCHeading::level1("จัดการบัญชีผู้ใช้", KornIcon::gear(),
 		KYCLink::internal("/logout", "ออกจากระบบ", KornIcon::rightFromBracket()),
 	) ?>
 </section>

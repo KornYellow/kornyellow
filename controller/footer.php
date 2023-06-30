@@ -29,9 +29,11 @@ echo "
 		</div>
 	</div>
 </footer>
-<a class='back-to-top fixed-bottom d-flex' href='#'>
-	".(KornIcon::angleUp())."
-</a>
+<div class='d-none back-to-top fixed-bottom d-flex justify-content-end pe-3 pb-3'>
+	<a href='#' class='text-slate-200 p-3 pb-2 rounded-5 bg-slate-600'>
+		".(KornIcon::caretUp()->xl())."
+	</a>
+</div>
 
 </body>
 </html>

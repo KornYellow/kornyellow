@@ -84,6 +84,7 @@ use libraries\kornyellow\instances\methods\KYUser;
 				<li class="nav-item">
 					<a class="nav-link px-3" href="/about/me" title="รู้จักผมกัน">รู้จักผมกัน</a>
 				</li>
+
 				<?php if (!KYUser::isLogin()): ?>
 					<li class="nav-item">
 						<a class="nav-link px-3" href="/login" title="เข้าสู่ระบบ">เข้าสู่ระบบ</a>
@@ -100,7 +101,7 @@ use libraries\kornyellow\instances\methods\KYUser;
 						<ul class="dropdown-menu dropdown-menu-end">
 							<li>
 								<a class="dropdown-item" href="/profile">
-									<?= KornIcon::cog()->me2() ?>
+									<?= KornIcon::gear()->me2() ?>
 									<span class="fw-semibold">จัดการบัญชีผู้ใช้</span>
 								</a>
 							</li>
