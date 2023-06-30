@@ -19,9 +19,6 @@ nav_buttons.forEach((element) => {
 
 let back_to_top_button = document.querySelector(".back-to-top");
 document.addEventListener("scroll", () => {
-    console.log(window.scrollY);
-    let body = document.querySelector("body");
-
     if (window.scrollY < 10)
         back_to_top_button.classList.add('d-none');
     else
